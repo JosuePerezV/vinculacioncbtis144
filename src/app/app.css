@@ -1,0 +1,182 @@
+/* --- Variables y Estilos Generales --- */
+:host {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #333;
+  display: block;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- Encabezado --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo {
+  height: 50px;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-text strong {
+  color: #9b111e;
+  font-size: 1.2rem;
+}
+
+.logo-text span {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #9b111e;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* --- Sección Hero --- */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 0;
+  gap: 40px;
+}
+
+/* --- Columna Izquierda --- */
+.hero-content {
+  flex: 1;
+  max-width: 600px;
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #1a202c;
+  margin-bottom: 20px;
+}
+
+.highlight {
+  color: #9b111e; /* Rojo institucional */
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+/* Botones de Rol */
+.role-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.role-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.btn-role {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* Colores específicos para cada rol */
+.btn-alumno { border-color: #bee3f8; color: #2b6cb0; background-color: #ebf8ff; }
+.btn-docente { border-color: #fef08a; color: #b45309; background-color: #fefce8; }
+.btn-empresa { border-color: #fecdd3; color: #be123c; background-color: #fff1f2; }
+.btn-vinculacion { border-color: #a7f3d0; color: #047857; background-color: #ecfdf5; }
+
+/* Botón Principal de Inicio de Sesión */
+.action-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.btn-primary {
+  background-color: #9b111e;
+  color: white;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(155, 17, 30, 0.2);
+}
+
+.contact-link {
+  text-decoration: none;
+  color: #9b111e;
+  font-size: 0.9rem;
+}
+
+/* --- Columna Derecha (Imagen) --- */
+.hero-graphic {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.students-img {
+  max-width: 100%;
+  height: auto;
+  /* El efecto de desvanecimiento inferior que mencionamos */
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
+/* --- Responsividad (Móviles) --- */
+@media (max-width: 900px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .navbar {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .role-buttons {
+    justify-content: center;
+  }
+  
+  .action-section {
+    align-items: center;
+  }
+}

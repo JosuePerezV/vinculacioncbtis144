@@ -1,0 +1,151 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  background-color: #f8f9fa; /* Fondo sutil para que las tarjetas blancas resalten */
+  padding: 20px;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: row; /* Fuerza a que estén siempre en fila (lado a lado) */
+  gap: 30px;
+  max-width: 850px;
+  width: 100%;
+  justify-content: center;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  padding: 50px 40px;
+  /* flex: 1 hace que ambas tarjetas tomen exactamente la misma mitad del espacio disponible */
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Tarjeta Izquierda --- */
+.info-card {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.login-logo {
+  width: 130px;
+  margin-bottom: 25px;
+}
+
+.info-card h2 {
+  color: #a81318; /* Rojo institucional */
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+  color: #6c757d;
+  font-size: 0.95rem;
+  text-align: left;
+  line-height: 2;
+}
+
+/* --- Tarjeta Derecha --- */
+.form-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.form-header h3 {
+  font-size: 1.3rem;
+  color: #000;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.form-header p {
+  font-size: 0.85rem;
+  color: #3b6b9a; /* Tono azul grisáceo del diseño */
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #000;
+}
+
+.input-group input {
+  padding: 12px 15px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+  border-color: #a81318;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  font-size: 0.85rem;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #495057;
+  cursor: pointer;
+}
+
+.forgot-link {
+  color: #a81318;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn-submit {
+  width: 100%;
+  background-color: #a81318;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+  background-color: #860f13;
+}
+
+/* --- Responsividad (Móviles) --- */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .card {
+    width: 90%; /* Evita que las tarjetas choquen con los bordes del celular */
+  }
+}
