@@ -1,12 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+// 1. Tienes que importar RouterOutlet
+import { RouterOutlet } from '@angular/router'; 
 
 @Component({
-  imports: [RouterOutlet],
   selector: 'app-root',
-  styleUrl: './app.css',
+  standalone: true,
+  // 2. Tienes que meterlo en este arreglo de imports
+  imports: [RouterOutlet], 
   templateUrl: './app.html',
+  styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('dgeti-sivi');
-}
+export class App { }

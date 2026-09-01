@@ -1,0 +1,57 @@
+<div class="app-layout">
+  
+  <!-- 1. Menú Lateral Izquierdo (Fijo) -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="dgeti.svg" alt="SIVI Logo" class="logo">
+      <div class="brand">
+        <strong>SiVi</strong>
+        <span>Vinculador</span>
+      </div>
+      <span class="badge">Alpha</span>
+    </div>
+
+    <nav class="sidebar-menu">
+      <a routerLink="/vinculacion/documentos" routerLinkActive="active">📄 Documentos</a>
+      <a routerLink="/vinculacion/becas" routerLinkActive="active">🏅 Becas</a>
+      <a routerLink="/vinculacion/colaboracion" routerLinkActive="active">🤝 Colaboración</a>
+      <a routerLink="/vinculacion/practicas" routerLinkActive="active">💼 Prácticas profesionales</a>
+      <a routerLink="/vinculacion/servicio-social" routerLinkActive="active">🤲 Servicio social</a>
+      <a routerLink="/vinculacion/directorio" routerLinkActive="active">📇 Directorio telefónico</a>
+      <a routerLink="/vinculacion/educacion-dual" routerLinkActive="active">🎓 Educación dual</a>
+      <a routerLink="/vinculacion/bolsa-trabajo" routerLinkActive="active">💼 Bolsa de trabajo</a>
+      <a routerLink="/vinculacion/egresados" routerLinkActive="active">👨‍🎓 Egresados</a>
+      <a routerLink="/vinculacion/convocatorias" routerLinkActive="active">📢 Convocatorias</a>
+      <a routerLink="/vinculacion/apoyo" routerLinkActive="active">🛟 Apoyo</a>
+      <a routerLink="/vinculacion/visitas" routerLinkActive="active">📅 Visitas</a>
+      <a routerLink="/vinculacion/alidet" routerLinkActive="active">👥 Alidet</a>
+      <a routerLink="/vinculacion/comite" routerLinkActive="active">👥 Comité vinculador</a>
+    </nav>
+  </aside>
+
+  <!-- 2. Lado Derecho (Top bar y Contenido dinámico) -->
+  <div class="main-wrapper">
+    
+    <!-- Barra Superior Fija -->
+    <header class="top-bar">
+      <!-- Este div vacío empuja el perfil hacia la extrema derecha -->
+      <div class="spacer"></div> 
+      
+      <!-- PERFIL EN LA ESQUINA SUPERIOR DERECHA -->
+      <div class="profile-container">
+        <div class="profile-circle">J</div>
+        <div class="profile-info">
+          <span class="profile-name">Hola, Jesús.</span>
+          <span class="profile-email">vinculador_tester&#64;dgeti.mx</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 3. Área Dinámica (El ÚNICO lugar que cambia y hace scroll) -->
+    <main class="content-area">
+      <router-outlet></router-outlet>
+    </main>
+    
+  </div>
+
+</div>
