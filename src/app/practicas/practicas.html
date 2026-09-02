@@ -1,1 +1,80 @@
-<p>practicas works!</p>
+<div class="modulo-contenedor">
+  
+  <!-- 1. Cabecera -->
+  <header class="modulo-cabecera">
+    <h2>Prácticas</h2>
+    <p>Gestión de prácticas registradas en el sistema.</p>
+  </header>
+
+  <!-- 2. Barra de Herramientas -->
+  <div class="modulo-toolbar">
+    <div class="buscador">
+      <span>🔍</span>
+      <input type="text" placeholder="Buscar por folio o asunto...">
+    </div>
+    
+    <div class="acciones">
+      <div class="filtros">
+        <div class="filtro-grupo">
+          <label>Filtrar por revisión</label>
+          <select><option>todos</option></select>
+        </div>
+        <div class="filtro-grupo">
+          <label>Filtrar por estado</label>
+          <select><option>Seleccionar</option></select>
+        </div>
+      </div>
+      
+      <div class="botones">
+        <button class="btn-secundario">📅 Fechas</button>
+        <button class="btn-secundario">📄 Plantillas</button>
+        <button class="btn-primario">📥 Exportar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Contenedor de Datos (Tabla) -->
+  <div class="tabla-responsiva">
+    <table class="tabla-sivi">
+      <thead>
+        <tr>
+          <th>No. Control</th>
+          <th>Nombre</th>
+          <th>Carrera</th>
+          <th>Empresa</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Fila de ejemplo 1 -->
+        <tr>
+          <td>100000351</td>
+          <td>Alejandro Cruz Cruz</td>
+          <td>Inteligencia Artificial</td>
+          <td>CBTis</td>
+          <td><span class="badge-estado">en_progreso</span></td>
+          <td class="iconos-accion">
+            <button title="Ver">👁️</button>
+            <button title="Pausar">⏸️</button>
+            <button title="Descargar">📥</button>
+          </td>
+        </tr>
+        <!-- Fila de ejemplo 2 -->
+        <tr>
+          <td>22307051440174</td>
+          <td>JUDITH XIMENA SOLIS ZEBADUA</td>
+          <td>Ofimática</td>
+          <td>Centro de Bachillerato Tecnológico Indus...</td>
+          <td><span class="badge-estado">en_progreso</span></td>
+          <td class="iconos-accion">
+            <button title="Ver">👁️</button>
+            <button title="Pausar">⏸️</button>
+            <button title="Descargar">📥</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
