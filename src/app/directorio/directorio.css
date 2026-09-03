@@ -1,0 +1,29 @@
+.modulo-contenedor { display: flex; flex-direction: column; gap: 20px; width: 100%; }
+
+/* --- Cabecera --- */
+.modulo-cabecera h2 { margin: 0; font-size: 24px; color: #333; }
+.modulo-cabecera p { margin: 5px 0 0 0; font-size: 13px; color: #777; }
+
+/* --- Barra de Herramientas --- */
+.modulo-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; }
+.buscador { display: flex; align-items: center; background: white; border: 1px solid #ddd; border-radius: 20px; padding: 8px 15px; flex: 1; min-width: 250px; }
+.buscador input { border: none; outline: none; margin-left: 10px; width: 100%; font-size: 14px; }
+.acciones { display: flex; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
+
+.botones { display: flex; gap: 10px; }
+button { padding: 10px 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 13px;}
+.btn-primario { background-color: #b54949; color: white; } 
+.btn-secundario { background-color: #8c2b2b; color: white; } 
+
+/* --- Tabla Responsiva --- */
+.tabla-responsiva { width: 100%; overflow-x: auto; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.tabla-sivi { width: 100%; min-width: 900px; border-collapse: collapse; }
+.tabla-sivi th { background-color: #fae8e9; color: #333; text-align: left; padding: 15px; font-size: 13px; font-weight: bold; }
+.tabla-sivi th:first-child { border-top-left-radius: 12px; }
+.tabla-sivi th:last-child { border-top-right-radius: 12px; }
+.tabla-sivi td { padding: 15px; border-bottom: 1px solid #eee; font-size: 13px; color: #444; vertical-align: middle; }
+
+/* --- Iconos de Acción --- */
+.iconos-accion { display: flex; gap: 8px; }
+.iconos-accion button { background: #fae8e9; color: #a81318; padding: 8px; border-radius: 50%; font-size: 14px; opacity: 0.9; transition: opacity 0.2s; }
+.iconos-accion button:hover { opacity: 1; }

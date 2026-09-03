@@ -1,0 +1,87 @@
+<div class="modulo-contenedor">
+  
+  <!-- 1. Cabecera (Sin pestañas en esta vista) -->
+  <header class="modulo-cabecera">
+    <h2>Colaboración</h2>
+    <p>Gestión de colaboración registradas en el sistema.</p>
+  </header>
+
+  <!-- 2. Barra de Herramientas -->
+  <div class="modulo-toolbar">
+    <div class="buscador">
+      <span>🔍</span>
+      <input type="text" placeholder="Buscar por folio o asunto...">
+    </div>
+    
+    <div class="acciones">
+      <div class="filtros">
+        <div class="filtro-grupo">
+          <label>Mes:</label>
+          <select><option>Mes</option></select>
+        </div>
+        <div class="filtro-grupo">
+          <label>Año:</label>
+          <select><option>Año</option></select>
+        </div>
+      </div>
+      
+      <div class="botones">
+        <button class="btn-primario">⊕ Nuevo</button>
+        <button class="btn-secundario">📥 Exportar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Tabla de Datos -->
+  <div class="tabla-responsiva">
+    <table class="tabla-sivi">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th>Fecha</th>
+          <th>Tipo de institución</th>
+          <th>Tipo Convenio/Acuerdo</th>
+          <th>Tipo de beneficiarios</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Fila 1 -->
+        <tr>
+          <td class="texto-bold">UNIVERSIDAD DEL SUR</td>
+          <td><span class="badge-outline">🤝 Convenio</span></td>
+          <td class="celda-fechas">
+            <span>Fecha de inicio:<br>29/05/2026</span>
+            <span>Fecha de fin:<br>28/05/2029</span>
+          </td>
+          <td><span class="badge-outline">Privada</span></td>
+          <td><span class="badge-outline">Prácticas Profesionales</span></td>
+          <td><span class="badge-outline">👤 Estudiantes</span></td>
+          <td class="iconos-accion">
+            <button title="Editar">✏️</button>
+            <button title="Eliminar" class="texto-rojo">🗑️</button>
+          </td>
+        </tr>
+
+        <!-- Fila 2 -->
+        <tr>
+          <td class="texto-bold">SECRETARÍA DE INFRAESTRUCTURA<br>COMUNICACIONES Y TRANSPORTE</td>
+          <td><span class="badge-outline">🤝 Convenio</span></td>
+          <td class="celda-fechas">
+            <span>Fecha de inicio:<br>28/06/2024</span>
+            <span>Fecha de fin:<br>27/06/2029</span>
+          </td>
+          <td><span class="badge-outline">Publica</span></td>
+          <td><span class="badge-outline">Servicio Social</span></td>
+          <td><span class="badge-outline">👤 Estudiantes</span></td>
+          <td class="iconos-accion">
+            <button title="Editar">✏️</button>
+            <button title="Eliminar" class="texto-rojo">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

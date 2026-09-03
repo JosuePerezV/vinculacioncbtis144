@@ -1,0 +1,53 @@
+.modulo-contenedor { display: flex; flex-direction: column; gap: 20px; width: 100%; }
+
+/* --- Cabecera --- */
+.modulo-cabecera h2 { margin: 0; font-size: 24px; color: #333; }
+.modulo-cabecera p { margin: 5px 0 0 0; font-size: 13px; color: #777; }
+
+/* --- Barra de Herramientas --- */
+.modulo-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; }
+.buscador { display: flex; align-items: center; background: white; border: 1px solid #ddd; border-radius: 20px; padding: 8px 15px; flex: 1; min-width: 250px; }
+.buscador input { border: none; outline: none; margin-left: 10px; width: 100%; font-size: 14px; }
+.acciones { display: flex; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
+.filtros { display: flex; gap: 10px; }
+.filtro-grupo { display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: bold;}
+.filtro-grupo select { padding: 8px; border: 1px solid #ddd; border-radius: 8px; background: white; }
+
+.botones { display: flex; gap: 10px; }
+button { padding: 10px 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 13px;}
+.btn-primario { background-color: #8c2b2b; color: white; } 
+.btn-secundario { background-color: #a84b4b; color: white; } 
+
+/* --- Tabla Responsiva --- */
+.tabla-responsiva { width: 100%; overflow-x: auto; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.tabla-sivi { width: 100%; min-width: 1000px; border-collapse: collapse; }
+.tabla-sivi th { background-color: #fae8e9; color: #333; text-align: left; padding: 15px; font-size: 12px; font-weight: bold; }
+.tabla-sivi th:first-child { border-top-left-radius: 12px; }
+.tabla-sivi th:last-child { border-top-right-radius: 12px; }
+.tabla-sivi td { padding: 15px; border-bottom: 1px solid #eee; font-size: 12px; color: #444; vertical-align: middle; }
+
+/* --- Tipografía y Celdas Específicas --- */
+.texto-bold { font-weight: 600; font-size: 11px; }
+
+.celda-fechas { display: flex; flex-direction: column; gap: 8px; font-size: 11px; color: #666; }
+
+/* --- Estilo de las Etiquetas (Badges) --- */
+.badge-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #e0b0b0; /* Borde rosa/rojo claro */
+  border-radius: 20px;
+  padding: 4px 10px;
+  color: #a81318;
+  background-color: transparent;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap; /* Evita que el texto de la etiqueta se rompa en dos líneas */
+}
+
+/* --- Iconos de Acción (Sin fondo en este diseño) --- */
+.iconos-accion { display: flex; gap: 15px; }
+.iconos-accion button { background: none; border: none; padding: 0; font-size: 16px; opacity: 0.8; transition: opacity 0.2s; }
+.iconos-accion button:hover { opacity: 1; }
+.texto-rojo { color: red; }

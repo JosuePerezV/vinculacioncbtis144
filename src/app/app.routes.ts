@@ -1,24 +1,27 @@
 import { Routes } from '@angular/router';
-import { Inicio } from './inicio/inicio'; // Importamos la nueva vista
+import { Inicio } from './inicio/inicio'; 
 import { Login } from './login/login';
 import { Vinculacion } from './vinculacion/vinculacion';
 import { Practicas } from './practicas/practicas';
 import { ServicioSocial } from './servicio-social/servicio-social';
+import { Becas } from './becas/becas';
+import { Documentos } from './documentos/documentos';
+import { Colaboracion } from './colaboracion/colaboracion';
+import { Directorio } from './directorio/directorio'; // 1. Importar Directorio
 
 export const routes: Routes = [
-  // Ruta por defecto (carga la vista de los estudiantes)
   { path: '', component: Inicio },
-  
-  // Ruta al Login
   { path: 'login', component: Login },
-  
-  // Ruta Padre (El cascarón maestro del panel)
   { 
     path: 'vinculacion', 
     component: Vinculacion, 
     children: [
       { path: 'practicas', component: Practicas },
-      { path: 'servicio-social', component: ServicioSocial }
+      { path: 'servicio-social', component: ServicioSocial },
+      { path: 'becas', component: Becas },
+      { path: 'documentos', component: Documentos },
+      { path: 'colaboracion', component: Colaboracion },
+      { path: 'directorio', component: Directorio } // 2. Registrar la ruta (coincide con tu routerLink)
     ]
   }
 ];

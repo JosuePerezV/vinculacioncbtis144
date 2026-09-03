@@ -1,0 +1,85 @@
+<div class="modulo-contenedor">
+  
+  <!-- 1. Cabecera y Pestañas -->
+  <header class="modulo-cabecera">
+    <h2>Becas</h2>
+    <p>Gestión de becas registradas en el sistema.</p>
+    
+    <div class="tabs-navegacion">
+      <button class="tab activa">🏅 Becas</button>
+      <button class="tab">📑 Solicitantes</button>
+    </div>
+  </header>
+
+  <!-- 2. Barra de Herramientas (Reutilizando la lógica de Prácticas) -->
+  <div class="modulo-toolbar">
+    <div class="buscador">
+      <span>🔍</span>
+      <input type="text" placeholder="Buscar por folio o asunto...">
+    </div>
+    
+    <div class="acciones">
+      <div class="filtros">
+        <div class="filtro-grupo">
+          <label>Mes:</label>
+          <select><option>Mes</option></select>
+        </div>
+        <div class="filtro-grupo">
+          <label>Año:</label>
+          <select><option>Año</option></select>
+        </div>
+      </div>
+      <button class="btn-primario">⊕ Nuevo</button>
+    </div>
+  </div>
+
+  <!-- 3. Cuadrícula de Tarjetas (Grid) -->
+  <div class="grid-tarjetas">
+    
+    <!-- Tarjeta de Ejemplo -->
+    <article class="tarjeta-beca">
+      
+      <!-- Encabezado de la tarjeta -->
+      <div class="tarjeta-header">
+        <h3>🏅 Estímulo alimenticio 2025-2026/2</h3>
+      </div>
+
+      <!-- Cuerpo de la tarjeta -->
+      <div class="tarjeta-body">
+        
+        <div class="etiquetas">
+          <span class="badge-amarillo">🚫 No económico</span>
+          <span class="badge-bordeado">✔️ Habilitada</span>
+        </div>
+
+        <p class="descripcion-beca">
+          Desayuno o comida gratis de lunes a viernes durante el periodo escolar 2025-2026/2.
+        </p>
+
+        <div class="requisitos">
+          <h4>✔️ Requisitos</h4>
+          <ul>
+            <li>✔️ Historial académico</li>
+            <li>✔️ Estudio socioeconómico</li>
+          </ul>
+        </div>
+
+        <div class="vigencia">
+          📅 Vigencia: 09/02/2026 - 20/02/2026
+        </div>
+      </div>
+
+      <!-- Pie de la tarjeta (Acciones) -->
+      <div class="tarjeta-footer">
+        <button title="Editar">✏️</button>
+        <button title="Eliminar">🗑️</button>
+        <button title="Deshabilitar">🔛</button>
+        <button title="Descargar">📥</button>
+      </div>
+
+    </article>
+    
+    <!-- Puedes copiar y pegar el bloque <article> para ver cómo se acomodan varias tarjetas -->
+
+  </div>
+</div>
