@@ -1,4 +1,4 @@
-<a href="#main-content" class="skip">Saltar al contenido</a>
+<a href="#main-content" class="skip" (click)="$event.preventDefault(); mainContent.focus()">Saltar al contenido</a>
 
 <div class="app-layout">
   @if (menuOpen()) {
@@ -89,7 +89,7 @@
       </div>
     </header>
 
-    <main id="main-content" class="content-area" tabindex="-1"><router-outlet /></main>
+    <main #mainContent id="main-content" class="content-area" tabindex="-1"><router-outlet /></main>
 
     <footer class="app-footer">SiVi / Sistema Virtual de Vinculación <span>DGETI</span></footer>
   </div>

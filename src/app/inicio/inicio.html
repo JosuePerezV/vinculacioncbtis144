@@ -17,7 +17,7 @@
       </p>
       <div class="actions">
         <a routerLink="/vinculacion/resumen" class="btn">Ir al panel →</a
-        ><a href="#servicios" class="learn">Conocer los servicios ↓</a>
+        ><a href="#servicios" class="learn" (click)="$event.preventDefault(); services.scrollIntoView()">Conocer los servicios ↓</a>
       </div>
     </div>
     <div class="hero-image">
@@ -26,7 +26,7 @@
       >
     </div>
   </section>
-  <section class="services" id="servicios">
+  <section #services class="services" id="servicios">
     <p class="eyebrow">Un mismo seguimiento</p>
     <h2>Conecta cada paso de tu trayectoria.</h2>
     <div class="cards">
