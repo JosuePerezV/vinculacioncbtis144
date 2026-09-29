@@ -1,17 +1,17 @@
 <div class="modulo-contenedor">
   
-  <!-- 1. Cabecera y Pestañas -->
+  <!-- 1. Cabecera y Pestañas Interactivas -->
   <header class="modulo-cabecera">
     <h2>Becas</h2>
     <p>Gestión de becas registradas en el sistema.</p>
     
     <div class="tabs-navegacion">
-      <button class="tab activa">🏅 Becas</button>
-      <button class="tab">📑 Solicitantes</button>
+      <button class="tab" [class.activa]="tabActiva === 'becas'" (click)="cambiarTab('becas')">🏅 Becas</button>
+      <button class="tab" [class.activa]="tabActiva === 'solicitantes'" (click)="cambiarTab('solicitantes')">📑 Solicitantes</button>
     </div>
   </header>
 
-  <!-- 2. Barra de Herramientas (Reutilizando la lógica de Prácticas) -->
+  <!-- 2. Barra de Herramientas -->
   <div class="modulo-toolbar">
     <div class="buscador">
       <span>🔍</span>
@@ -20,42 +20,59 @@
     
     <div class="acciones">
       <div class="filtros">
+        <!-- Dropdown de Meses -->
         <div class="filtro-grupo">
           <label>Mes:</label>
-          <select><option>Mes</option></select>
+          <select>
+            <option>Mes</option>
+            <option>Enero</option>
+            <option>Febrero</option>
+            <option>Marzo</option>
+            <option>Abril</option>
+            <option>Mayo</option>
+            <option>Junio</option>
+            <option>Julio</option>
+            <option>Agosto</option>
+            <option>Septiembre</option>
+            <option>Octubre</option>
+            <option>Noviembre</option>
+            <option>Diciembre</option>
+          </select>
         </div>
+        
+        <!-- Dropdown de Años -->
         <div class="filtro-grupo">
           <label>Año:</label>
-          <select><option>Año</option></select>
+          <select>
+            <option>Año</option>
+            <option>2026</option>
+            <option>2025</option>
+            <option>2024</option>
+            <option>2023</option>
+            <option>2022</option>
+            <option>2021</option>
+            <option>2020</option>
+          </select>
         </div>
       </div>
       <button class="btn-primario">⊕ Nuevo</button>
     </div>
   </div>
 
-  <!-- 3. Cuadrícula de Tarjetas (Grid) -->
-  <div class="grid-tarjetas">
-    
-    <!-- Tarjeta de Ejemplo -->
+  <!-- 3. Vista de Becas (Tarjetas) -->
+  <div class="grid-tarjetas" *ngIf="tabActiva === 'becas'">
     <article class="tarjeta-beca">
-      
-      <!-- Encabezado de la tarjeta -->
       <div class="tarjeta-header">
         <h3>🏅 Estímulo alimenticio 2025-2026/2</h3>
       </div>
-
-      <!-- Cuerpo de la tarjeta -->
       <div class="tarjeta-body">
-        
         <div class="etiquetas">
           <span class="badge-amarillo">🚫 No económico</span>
           <span class="badge-bordeado">✔️ Habilitada</span>
         </div>
-
         <p class="descripcion-beca">
           Desayuno o comida gratis de lunes a viernes durante el periodo escolar 2025-2026/2.
         </p>
-
         <div class="requisitos">
           <h4>✔️ Requisitos</h4>
           <ul>
@@ -63,23 +80,24 @@
             <li>✔️ Estudio socioeconómico</li>
           </ul>
         </div>
-
         <div class="vigencia">
           📅 Vigencia: 09/02/2026 - 20/02/2026
         </div>
       </div>
-
-      <!-- Pie de la tarjeta (Acciones) -->
       <div class="tarjeta-footer">
         <button title="Editar">✏️</button>
         <button title="Eliminar">🗑️</button>
         <button title="Deshabilitar">🔛</button>
         <button title="Descargar">📥</button>
       </div>
-
     </article>
-    
-    <!-- Puedes copiar y pegar el bloque <article> para ver cómo se acomodan varias tarjetas -->
-
   </div>
+
+  <!-- 4. Vista de Solicitantes -->
+  <div class="tabla-responsiva" *ngIf="tabActiva === 'solicitantes'">
+    <div style="padding: 40px; text-align: center; color: #777;">
+      Aquí va la tabla para gestionar a los solicitantes...
+    </div>
+  </div>
+
 </div>

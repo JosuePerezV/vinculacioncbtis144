@@ -1,87 +1,237 @@
 <div class="modulo-contenedor">
   
-  <!-- 1. Cabecera (Sin pestañas en esta vista) -->
   <header class="modulo-cabecera">
-    <h2>Colaboración</h2>
-    <p>Gestión de colaboración registradas en el sistema.</p>
+    <h2>Documentos</h2>
+    <p>Gestión de documentos registrados en el sistema.</p>
+    
+    <!-- Pestañas (El [class.activa] prende la línea roja automáticamente) -->
+    <div class="tabs-navegacion">
+      <button class="tab" [class.activa]="tabActiva === 'oficios'" (click)="cambiarTab('oficios')"><i class="fa-solid fa-file-signature"></i> Oficios</button>
+      <button class="tab" [class.activa]="tabActiva === 'circulares'" (click)="cambiarTab('circulares')"><i class="fa-solid fa-bullhorn"></i> Circulares</button>
+      <button class="tab" [class.activa]="tabActiva === 'constancias'" (click)="cambiarTab('constancias')"><i class="fa-solid fa-certificate"></i> Constancias</button>
+    </div>
   </header>
 
-  <!-- 2. Barra de Herramientas -->
+  <!-- Barra de Herramientas -->
   <div class="modulo-toolbar">
-    <div class="buscador">
-      <span>🔍</span>
+   <div class="buscador">
+      <span><i class="fa-solid fa-magnifying-glass" style="color: #888;"></i></span>
       <input type="text" placeholder="Buscar por folio o asunto...">
     </div>
     
     <div class="acciones">
-      <div class="filtros">
+     <div class="filtros">
+        <!-- Dropdown de Meses -->
         <div class="filtro-grupo">
           <label>Mes:</label>
-          <select><option>Mes</option></select>
+          <select>
+            <option>Mes</option>
+            <option>Enero</option>
+            <option>Febrero</option>
+            <option>Marzo</option>
+            <option>Abril</option>
+            <option>Mayo</option>
+            <option>Junio</option>
+            <option>Julio</option>
+            <option>Agosto</option>
+            <option>Septiembre</option>
+            <option>Octubre</option>
+            <option>Noviembre</option>
+            <option>Diciembre</option>
+          </select>
         </div>
+        
+        <!-- Dropdown de Años -->
         <div class="filtro-grupo">
           <label>Año:</label>
-          <select><option>Año</option></select>
+          <select>
+            <option>Año</option>
+            <option>2026</option>
+            <option>2025</option>
+            <option>2024</option>
+            <option>2023</option>
+            <option>2022</option>
+            <option>2021</option>
+            <option>2020</option>
+          </select>
         </div>
       </div>
       
+      <!-- Los botones cambian de orden según la pestaña -->
       <div class="botones">
-        <button class="btn-primario">⊕ Nuevo</button>
-        <button class="btn-secundario">📥 Exportar</button>
+        <ng-container *ngIf="tabActiva === 'oficios' || tabActiva === 'circulares'">
+          <button class="btn-primario" (click)="abrirModalNuevo()"><i class="fa-solid fa-plus"></i> Nuevo</button>
+          <button class="btn-secundario" (click)="abrirModalPlantilla()"><i class="fa-solid fa-file-word"></i> Plantilla</button>
+        </ng-container>
+        
+        <ng-container *ngIf="tabActiva === 'constancias'">
+          <button class="btn-secundario" (click)="abrirModalPlantilla()"><i class="fa-solid fa-file-word"></i> Plantilla</button>
+          <button class="btn-primario" (click)="abrirModalNuevo()"><i class="fa-solid fa-plus"></i> Nuevo</button>
+        </ng-container>
       </div>
     </div>
   </div>
 
-  <!-- 3. Tabla de Datos -->
-  <div class="tabla-responsiva">
+  <!-- ================= TABLA 1: OFICIOS ================= -->
+  <div class="tabla-responsiva" *ngIf="tabActiva === 'oficios'">
     <table class="tabla-sivi">
       <thead>
         <tr>
-          <th>Nombre</th>
-          <th>Tipo</th>
-          <th>Fecha</th>
-          <th>Tipo de institución</th>
-          <th>Tipo Convenio/Acuerdo</th>
-          <th>Tipo de beneficiarios</th>
-          <th>Acciones</th>
+          <th>Folio</th><th>Fecha</th><th>Asunto</th><th>Destinatario</th><th>Remitente</th><th>Estatus</th><th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Fila 1 -->
         <tr>
-          <td class="texto-bold">UNIVERSIDAD DEL SUR</td>
-          <td><span class="badge-outline">🤝 Convenio</span></td>
-          <td class="celda-fechas">
-            <span>Fecha de inicio:<br>29/05/2026</span>
-            <span>Fecha de fin:<br>28/05/2029</span>
-          </td>
-          <td><span class="badge-outline">Privada</span></td>
-          <td><span class="badge-outline">Prácticas Profesionales</span></td>
-          <td><span class="badge-outline">👤 Estudiantes</span></td>
+          <td>001/CB144-VINC/05/2026</td>
+          <td>26/05/2026</td>
+          <td>Feria vocacional CBTis 144</td>
+          <td class="celda-doble"><span class="nombre">Arallely Díaz</span><span class="cargo">Jefa de docentes</span></td>
+          <td class="celda-doble"><span class="nombre">Jesús Castillejos Aragon</span><span class="cargo">Jefe del Departamento de Vinculación con el Sector Productivo</span></td>
+          <td><span class="badge-estado">Enviado</span></td>
           <td class="iconos-accion">
-            <button title="Editar">✏️</button>
-            <button title="Eliminar" class="texto-rojo">🗑️</button>
-          </td>
-        </tr>
-
-        <!-- Fila 2 -->
-        <tr>
-          <td class="texto-bold">SECRETARÍA DE INFRAESTRUCTURA<br>COMUNICACIONES Y TRANSPORTE</td>
-          <td><span class="badge-outline">🤝 Convenio</span></td>
-          <td class="celda-fechas">
-            <span>Fecha de inicio:<br>28/06/2024</span>
-            <span>Fecha de fin:<br>27/06/2029</span>
-          </td>
-          <td><span class="badge-outline">Publica</span></td>
-          <td><span class="badge-outline">Servicio Social</span></td>
-          <td><span class="badge-outline">👤 Estudiantes</span></td>
-          <td class="iconos-accion">
-            <button title="Editar">✏️</button>
-            <button title="Eliminar" class="texto-rojo">🗑️</button>
+            <button title="Descargar"><i class="fa-solid fa-download"></i></button> 
+            <button title="Editar"><i class="fa-solid fa-pen"></i></button> 
+            <button title="Eliminar"><i class="fa-solid fa-trash"></i></button> 
+            <button title="Subir"><i class="fa-solid fa-upload"></i></button> 
+            <button title="Ver"><i class="fa-solid fa-eye"></i></button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 
-</div>
+  <!-- ================= TABLA 2: CIRCULARES ================= -->
+  <div class="tabla-responsiva" *ngIf="tabActiva === 'circulares'">
+    <table class="tabla-sivi">
+      <thead>
+        <tr>
+          <th>Folio</th><th>Fecha</th><th>Asunto</th><th>Destinatario</th><th>Firmante</th><th>Elabora</th><th>Revisó</th><th>Estatus</th><th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>002/CIR-CB144-VINC/05/2026</td>
+          <td>27/05/2026</td>
+          <td>Feria vocacional CBTis 144</td>
+          <td>Ramon gonzales</td>
+          <td class="celda-doble"><span class="nombre">Jesús Castillejos Aragón</span><span class="cargo">Jefe del Departamento de Vinculación con el Sector Productivo</span></td>
+          <td>N/A</td>
+          <td>N/A</td>
+          <td><span class="badge-estado">Enviado</span></td>
+          <td class="iconos-accion">
+            <button title="Descargar">📥</button> <button title="Subir">📤</button> <button title="Ver">👁️</button> <button title="Editar">✏️</button> <button title="Eliminar">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ================= TABLA 3: CONSTANCIAS ================= -->
+  <div class="tabla-responsiva" *ngIf="tabActiva === 'constancias'">
+    <table class="tabla-sivi">
+      <thead>
+        <tr>
+          <th>Periodo</th><th>Nombre</th><th>Tipo de aporte</th><th>Descripción</th><th>Lugar de expedición</th><th>Fecha de expedición</th><th>Actividad o evento</th><th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2025-<br>2026/2</td>
+          <td>CESAR AUGUSTO FLORES<br>BARRIENTOS</td>
+          <td>Por su aportación en mejora continua<br>en la educación</td>
+          <td>Demostrado a través de la<br>elaboración de reactivos</td>
+          <td>Tuxtla Gutiérrez</td>
+          <td>2026-02-09<br>00:00:00</td>
+          <td>Elaboración de reactivos</td>
+          <td class="iconos-accion">
+            <button title="Descargar">📥</button> <button title="Subir">📤</button> <button title="Ver">👁️</button> <button title="Eliminar">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<!-- ================= MODAL NUEVO OFICIO ================= -->
+  <div class="modal-overlay" *ngIf="mostrarModalNuevo">
+    <div class="modal-content">
+      
+      <h3>Crear Nuevo Oficio</h3>
+      <p class="modal-subtitle">Complete el formulario para agregar un nuevo oficio.</p>
+
+      <form>
+        <div class="form-checkbox">
+          <input type="checkbox" id="folioPersonalizado">
+          <label for="folioPersonalizado">Usar folio personalizado</label>
+        </div>
+
+        <div class="form-group">
+          <label>Folio</label>
+          <input type="text" value="001/CB144-VINC/09/2026">
+        </div>
+
+        <div class="form-group">
+          <label>Fecha del Oficio</label>
+          <input type="date" value="2026-09-08">
+        </div>
+
+        <div class="form-group">
+          <label>Asunto</label>
+          <input type="text" placeholder="Ingrese el asunto del oficio">
+        </div>
+
+        <div class="form-group">
+          <label>Destinatario</label>
+          <input type="text" placeholder="Ingrese el nombre del destinatario">
+        </div>
+
+        <div class="form-group">
+          <label>Puesto del Destinatario</label>
+          <input type="text" placeholder="Ingrese el puesto del destinatario">
+        </div>
+
+        <div class="form-group">
+          <label>Remitente</label>
+          <input type="text" value="Jesús Lira">
+        </div>
+
+        <div class="form-group">
+          <label>Puesto del Remitente</label>
+          <input type="text" value="Jefe del Departamento de Vinculación con el Sector Productivo">
+        </div>
+
+        <div class="modal-acciones">
+          <button type="button" class="btn-cancelar" (click)="cerrarModalNuevo()">Cancelar</button>
+          <button type="button" class="btn-guardar">Crear Oficio</button>
+        </div>
+      </form>
+
+    </div>
+  </div> 
+
+  <!-- ================= MODAL SUBIR PLANTILLA ================= -->
+  <div class="modal-overlay" *ngIf="mostrarModalPlantilla">
+    <div class="modal-content" style="max-width: 500px;">
+      
+      <!-- Usamos la función para cambiar el título -->
+      <h3>Subir Plantilla de {{ obtenerTipoDoc() }}</h3>
+      
+      <!-- Usamos la función, la convertimos a minúsculas y usamos tabActiva para el plural -->
+      <p class="modal-subtitle">
+        Sube una plantilla de {{ obtenerTipoDoc().toLowerCase() }} en formato .docx para usarla al generar nuevas {{ tabActiva }}.
+      </p>
+
+      <form>
+        <div class="form-group">
+          <label>Seleccionar Archivo</label>
+          <input type="file" accept=".docx" class="input-archivo">
+        </div>
+
+        <div class="modal-acciones">
+          <button type="button" class="btn-cancelar" (click)="cerrarModalPlantilla()">Cancelar</button>
+          <button type="button" class="btn-guardar">Subir Plantilla</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div> 

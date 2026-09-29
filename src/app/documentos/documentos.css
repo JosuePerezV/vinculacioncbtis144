@@ -18,24 +18,73 @@
 .filtro-grupo select { padding: 8px; border: 1px solid #ddd; border-radius: 8px; background: white; }
 
 .botones { display: flex; gap: 10px; }
-button { padding: 10px 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 5px; }
-.btn-primario { background-color: #b54949; color: white; } /* Botón rojo claro */
-.btn-secundario { background-color: #8c2b2b; color: white; } /* Botón rojo oscuro */
+button { padding: 10px 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 13px;}
+.btn-primario { background-color: #8c2b2b; color: white; } 
+.btn-secundario { background-color: #a84b4b; color: white; } 
 
 /* --- Tabla Responsiva --- */
 .tabla-responsiva { width: 100%; overflow-x: auto; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 .tabla-sivi { width: 100%; min-width: 1000px; border-collapse: collapse; }
-.tabla-sivi th { background-color: #fae8e9; color: #333; text-align: left; padding: 15px; font-size: 13px; font-weight: bold; }
+.tabla-sivi th { background-color: #fae8e9; color: #333; text-align: left; padding: 15px; font-size: 12px; font-weight: bold; }
 .tabla-sivi th:first-child { border-top-left-radius: 12px; }
 .tabla-sivi th:last-child { border-top-right-radius: 12px; }
-.tabla-sivi td { padding: 15px; border-bottom: 1px solid #eee; font-size: 13px; color: #444; vertical-align: middle; }
+.tabla-sivi td { padding: 15px; border-bottom: 1px solid #eee; font-size: 12px; color: #444; vertical-align: middle; }
 
-/* --- Celdas de Texto Doble --- */
+/* --- Celdas Dobles (Nombre y Cargo) --- */
 .celda-doble { display: flex; flex-direction: column; gap: 2px; }
 .celda-doble .nombre { color: #333; font-weight: 500; }
 .celda-doble .cargo { color: #888; font-size: 11px; }
 
 /* --- Elementos internos --- */
 .badge-estado { border: 1px solid #ccc; padding: 4px 12px; border-radius: 12px; font-size: 12px; color: #666; background-color: #f9f9f9; }
-.iconos-accion { display: flex; gap: 8px; }
-.iconos-accion button { background: #fae8e9; color: #a81318; padding: 8px; border-radius: 50%; font-size: 14px; }
+.iconos-accion { display: flex; gap: 6px; }
+.iconos-accion button { background: #fae8e9; color: #a81318; padding: 8px; border-radius: 50%; font-size: 13px; opacity: 0.9; transition: opacity 0.2s;}
+.iconos-accion button:hover { opacity: 1; }
+/* ================= MODAL ESTILOS ================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4); /* Pantalla oscura detrás */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Asegura que flote sobre todo lo demás */
+}
+
+.modal-content {
+  background: #fdfafb; /* Fondo con el tono rosado súper clarito de tu imagen */
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 450px;
+  max-height: 90vh; /* Si la pantalla es pequeña, no se sale de arriba a abajo */
+  overflow-y: auto; /* Activa el scroll si el formulario es muy alto */
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.modal-content h3 { margin: 0 0 5px 0; font-size: 18px; color: #222; }
+.modal-subtitle { font-size: 12px; color: #666; margin-bottom: 20px; }
+
+/* --- Formulario --- */
+.form-checkbox { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; font-size: 13px; color: #333; }
+
+.form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; }
+.form-group label { font-size: 12px; color: #222; }
+.form-group input { 
+  padding: 10px; 
+  border: 1px solid #ddd; 
+  border-radius: 6px; 
+  font-size: 13px; 
+  color: #333;
+  outline: none; 
+}
+.form-group input:focus { border-color: #8c2b2b; } /* Borde guinda al escribir */
+
+/* --- Botones del Modal --- */
+.modal-acciones { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
+.btn-cancelar { background-color: #fadada; color: #8c2b2b; padding: 10px 25px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; }
+.btn-guardar { background-color: #8c2b2b; color: white; padding: 10px 25px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; }
+.input-archivo { background-color: white; cursor: pointer; }
