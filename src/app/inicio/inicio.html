@@ -1,59 +1,51 @@
-<!-- Encabezado / Menú de navegación -->
-<header class="navbar">
-  <div class="logo-container">
-    <!-- Asegúrate de poner tu logo real en la carpeta src/assets/ -->
-    <img src="dgeti.svg" alt="DGETI SiVi Logo" class="logo">
-    <div class="logo-text">
-      <strong>DGETI SiVi</strong>
-      <span>Sistema virtual de vinculación</span>
-    </div>
-  </div>
-  
-  <nav class="nav-links">
-    <a href="#">Planteles</a>
-    <a href="#">Servicios</a>
-    <a href="#">Colaboración</a>
-    <a href="#">Acerca de</a>
-  </nav>
+<header class="landing-nav">
+  <a class="brand" routerLink="/"
+    ><img src="dgeti.svg" alt="DGETI" width="48" height="48" /><span
+      ><strong>SiVi / DGETI</strong><small>Sistema Virtual de Vinculación</small></span
+    ></a
+  ><a class="btn secondary" routerLink="/login">Acceder →</a>
 </header>
 
-<!-- Sección Principal (Hero) -->
-<main class="hero-section">
-  <!-- Columna Izquierda: Textos y Botones -->
-  <div class="hero-content">
-    <h1>Bienvenido a <span class="highlight">DGETI SiVi</span></h1>
-    
-    <p class="description">
-      El Sistema Virtual de Vinculación de la DGETI facilita la conexión entre
-      estudiantes, docentes y empresas para prácticas profesionales,
-      proyectos colaborativos y oportunidades de empleo.
-    </p>
-
-    <div class="role-selection">
-      <p class="role-title">¿QUIÉN ERES?</p>
-      <div class="role-buttons">
-        <button class="btn-role btn-alumno">👤 Alumno</button>
-        <button class="btn-role btn-docente">🎓 Docente</button>
-        <button class="btn-role btn-empresa">💼 Empresa</button>
-        <button class="btn-role btn-vinculacion">🛡️ Vinculación</button>
+<main>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Educación que conecta</p>
+      <h1>Tu siguiente etapa<br />empieza <span>aquí.</span></h1>
+      <p class="description">
+        Un espacio para acompañar a estudiantes, docentes e instituciones en cada proceso de
+        vinculación.
+      </p>
+      <div class="actions">
+        <a routerLink="/vinculacion/resumen" class="btn">Ir al panel →</a
+        ><a href="#servicios" class="learn">Conocer los servicios ↓</a>
       </div>
     </div>
-
-    <div class="action-section">
-  <!-- Agregamos routerLink="/login" al botón -->
-  <button routerLink="/login" class="btn-primary">
-    Iniciar Sesión en SiVi <span class="arrow">→</span>
-  </button>
-  
-  <a href="#" class="contact-link">
-    ¿No tienes un documento de colaboración? <strong>Contáctanos →</strong>
-  </a>
-</div>
-  </div>
-
-  <!-- Columna Derecha: Imagen -->
-  <div class="hero-graphic">
-    <!-- Asegúrate de guardar la foto sin fondo en src/assets/ -->
-    <img src="estudiantes.webp" alt="Estudiantes DGETI" class="students-img">
-  </div>
+    <div class="hero-image">
+      <img src="estudiantes.webp" alt="Estudiantes DGETI" width="640" height="640" /><span
+        >Formación · Experiencia · Comunidad</span
+      >
+    </div>
+  </section>
+  <section class="services" id="servicios">
+    <p class="eyebrow">Un mismo seguimiento</p>
+    <h2>Conecta cada paso de tu trayectoria.</h2>
+    <div class="cards">
+      <article class="panel">
+        <span class="badge">01</span>
+        <h3>Documentos</h3>
+        <p class="muted">Oficios, circulares y constancias con formularios y previsualización.</p>
+      </article>
+      <article class="panel">
+        <span class="badge">02</span>
+        <h3>Prácticas profesionales</h3>
+        <p class="muted">Expedientes, entregas y observaciones en cada etapa.</p>
+      </article>
+      <article class="panel">
+        <span class="badge">03</span>
+        <h3>Comunidad institucional</h3>
+        <p class="muted">Conecta con instituciones, oportunidades y programas de vinculación.</p>
+      </article>
+    </div>
+  </section>
 </main>
+<footer>SiVi · DGETI <span>Sistema Virtual de Vinculación.</span></footer>

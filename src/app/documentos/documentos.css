@@ -1,90 +1,66 @@
-.modulo-contenedor { display: flex; flex-direction: column; gap: 20px; width: 100%; }
-
-/* --- Cabecera y Pestañas --- */
-.modulo-cabecera h2 { margin: 0; font-size: 24px; color: #333; }
-.modulo-cabecera p { margin: 5px 0 15px 0; font-size: 13px; color: #777; }
-
-.tabs-navegacion { display: flex; border-bottom: 2px solid #eaeaea; gap: 20px; }
-.tab { background: none; border: none; padding: 10px 5px; font-size: 14px; font-weight: bold; color: #666; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; }
-.tab.activa { color: #a81318; border-bottom: 3px solid #a81318; }
-
-/* --- Barra de Herramientas --- */
-.modulo-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; }
-.buscador { display: flex; align-items: center; background: white; border: 1px solid #ddd; border-radius: 20px; padding: 8px 15px; flex: 1; min-width: 250px; }
-.buscador input { border: none; outline: none; margin-left: 10px; width: 100%; font-size: 14px; }
-.acciones { display: flex; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
-.filtros { display: flex; gap: 10px; }
-.filtro-grupo { display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: bold;}
-.filtro-grupo select { padding: 8px; border: 1px solid #ddd; border-radius: 8px; background: white; }
-
-.botones { display: flex; gap: 10px; }
-button { padding: 10px 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 13px;}
-.btn-primario { background-color: #8c2b2b; color: white; } 
-.btn-secundario { background-color: #a84b4b; color: white; } 
-
-/* --- Tabla Responsiva --- */
-.tabla-responsiva { width: 100%; overflow-x: auto; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-.tabla-sivi { width: 100%; min-width: 1000px; border-collapse: collapse; }
-.tabla-sivi th { background-color: #fae8e9; color: #333; text-align: left; padding: 15px; font-size: 12px; font-weight: bold; }
-.tabla-sivi th:first-child { border-top-left-radius: 12px; }
-.tabla-sivi th:last-child { border-top-right-radius: 12px; }
-.tabla-sivi td { padding: 15px; border-bottom: 1px solid #eee; font-size: 12px; color: #444; vertical-align: middle; }
-
-/* --- Celdas Dobles (Nombre y Cargo) --- */
-.celda-doble { display: flex; flex-direction: column; gap: 2px; }
-.celda-doble .nombre { color: #333; font-weight: 500; }
-.celda-doble .cargo { color: #888; font-size: 11px; }
-
-/* --- Elementos internos --- */
-.badge-estado { border: 1px solid #ccc; padding: 4px 12px; border-radius: 12px; font-size: 12px; color: #666; background-color: #f9f9f9; }
-.iconos-accion { display: flex; gap: 6px; }
-.iconos-accion button { background: #fae8e9; color: #a81318; padding: 8px; border-radius: 50%; font-size: 13px; opacity: 0.9; transition: opacity 0.2s;}
-.iconos-accion button:hover { opacity: 1; }
-/* ================= MODAL ESTILOS ================= */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.4); /* Pantalla oscura detrás */
+.paper {
+  background: white;
+  border: 1px solid var(--line);
+  padding: clamp(20px, 5vw, 56px);
+  max-width: 780px;
+  margin: auto;
+  box-shadow: 0 6px 24px #1833230a;
+}
+.paper-brand {
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 9999; /* Asegura que flote sobre todo lo demás */
+  gap: 16px;
+  padding-bottom: 22px;
+  border-bottom: 2px solid var(--wine);
 }
-
-.modal-content {
-  background: #fdfafb; /* Fondo con el tono rosado súper clarito de tu imagen */
-  padding: 30px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 450px;
-  max-height: 90vh; /* Si la pantalla es pequeña, no se sale de arriba a abajo */
-  overflow-y: auto; /* Activa el scroll si el formulario es muy alto */
-  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+.paper-brand small {
+  display: block;
+  color: var(--muted);
 }
-
-.modal-content h3 { margin: 0 0 5px 0; font-size: 18px; color: #222; }
-.modal-subtitle { font-size: 12px; color: #666; margin-bottom: 20px; }
-
-/* --- Formulario --- */
-.form-checkbox { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; font-size: 13px; color: #333; }
-
-.form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; }
-.form-group label { font-size: 12px; color: #222; }
-.form-group input { 
-  padding: 10px; 
-  border: 1px solid #ddd; 
-  border-radius: 6px; 
-  font-size: 13px; 
-  color: #333;
-  outline: none; 
+.paper-brand span {
+  margin-left: auto;
+  color: var(--wine);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
 }
-.form-group input:focus { border-color: #8c2b2b; } /* Borde guinda al escribir */
-
-/* --- Botones del Modal --- */
-.modal-acciones { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
-.btn-cancelar { background-color: #fadada; color: #8c2b2b; padding: 10px 25px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; }
-.btn-guardar { background-color: #8c2b2b; color: white; padding: 10px 25px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; }
-.input-archivo { background-color: white; cursor: pointer; }
+.paper-date {
+  text-align: right;
+  font-size: 0.85rem;
+  margin: 28px 0;
+}
+.paper-body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+}
+.signature {
+  margin-top: 40px;
+  line-height: 1.8;
+}
+.paper footer {
+  margin-top: 36px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+.revision {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.revision summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+label.btn:focus-within {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .paper-brand {
+    flex-wrap: wrap;
+  }
+  .paper-brand span {
+    margin-left: 0;
+  }
+}

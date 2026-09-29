@@ -1,9 +1,8 @@
 <div class="login-wrapper">
   <div class="login-container">
-    
     <!-- Tarjeta Izquierda (Información) -->
     <div class="card info-card">
-      <img src="dgeti.svg" alt="Logo DGETI" class="login-logo">
+      <img src="dgeti.svg" alt="Logo DGETI" class="login-logo" />
       <h2>Iniciar sesión</h2>
       <ul class="info-list">
         <li>• Accede a tus servicios</li>
@@ -17,28 +16,38 @@
         <h3>Accede a tu cuenta</h3>
         <p>Ingresa tus credenciales para continuar.</p>
       </div>
-      
-      <form class="login-form">
+
+      <form class="login-form" #form="ngForm" (ngSubmit)="submit(form)">
         <div class="input-group">
           <label for="email">Email o matrícula</label>
-          <input type="text" id="email" placeholder="">
+          <input
+            type="text"
+            id="email"
+            name="username"
+            [(ngModel)]="username"
+            autocomplete="username"
+            required
+          />
         </div>
-        
+
         <div class="input-group">
           <label for="password">Contraseña</label>
-          <input type="password" id="password" placeholder="">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="password"
+            autocomplete="current-password"
+            required
+          />
         </div>
-        
-        <div class="form-actions">
-          <label class="checkbox-container">
-            <input type="checkbox"> Recuérdame
-          </label>
-          <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
-        </div>
-        
-        <button type="button" class="btn-submit">Iniciar sesión</button>
+
+        <button type="submit" class="btn-submit">Iniciar sesión</button>
+        @if (error) {
+          <p class="form-error" role="alert">{{ error }}</p>
+        }
+        <a class="direct-link" routerLink="/vinculacion/resumen">Ir directamente al panel</a>
       </form>
     </div>
-
   </div>
 </div>

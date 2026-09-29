@@ -22,7 +22,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   padding: 50px 40px;
   /* flex: 1 hace que ambas tarjetas tomen exactamente la misma mitad del espacio disponible */
-  flex: 1; 
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
@@ -40,7 +40,7 @@
 }
 
 .info-card h2 {
-  color: #a81318; /* Rojo institucional */
+  color: var(--wine); /* Rojo institucional */
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 30px;
@@ -70,7 +70,7 @@
 
 .form-header p {
   font-size: 0.85rem;
-  color: #3b6b9a; /* Tono azul grisáceo del diseño */
+  color: var(--muted); /* Tono azul grisáceo del diseño */
 }
 
 .input-group {
@@ -96,7 +96,7 @@
 }
 
 .input-group input:focus {
-  border-color: #a81318;
+  border-color: var(--wine);
 }
 
 .form-actions {
@@ -116,14 +116,14 @@
 }
 
 .forgot-link {
-  color: #a81318;
+  color: var(--wine);
   text-decoration: none;
   font-weight: 600;
 }
 
 .btn-submit {
   width: 100%;
-  background-color: #a81318;
+  background-color: var(--wine);
   color: white;
   border: none;
   padding: 14px;
@@ -135,7 +135,7 @@
 }
 
 .btn-submit:hover {
-  background-color: #860f13;
+  background-color: var(--wine-dark);
 }
 
 /* --- Responsividad (Móviles) --- */
@@ -144,8 +144,38 @@
     flex-direction: column;
     align-items: center;
   }
-  
+
   .card {
     width: 90%; /* Evita que las tarjetas choquen con los bordes del celular */
+  }
+}
+.login-wrapper {
+  min-height: 100dvh;
+  background: var(--bg);
+}
+.card {
+  min-width: 0;
+}
+.direct-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.85rem;
+}
+.form-error {
+  color: #9c2828;
+  font-size: 0.85rem;
+}
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+    padding: 28px 24px;
+  }
+  .login-logo {
+    width: 80px;
+    margin-bottom: 10px;
+  }
+  .info-card h2 {
+    margin: 10px 0;
   }
 }

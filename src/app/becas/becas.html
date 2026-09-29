@@ -6,16 +6,16 @@
     <p>Gestión de becas registradas en el sistema.</p>
     
     <div class="tabs-navegacion">
-      <button class="tab" [class.activa]="tabActiva === 'becas'" (click)="cambiarTab('becas')">🏅 Becas</button>
-      <button class="tab" [class.activa]="tabActiva === 'solicitantes'" (click)="cambiarTab('solicitantes')">📑 Solicitantes</button>
+      <button class="tab" [class.activa]="tabActiva === 'becas'" (click)="cambiarTab('becas')"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 1 0 0 12 6 6 0 0 0 0-12ZM8 14l-2 8 6-3 6 3-2-8" /></svg> Becas</button>
+      <button class="tab" [class.activa]="tabActiva === 'solicitantes'" (click)="cambiarTab('solicitantes')"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H5v20h14V7Zm0 0v5h5M8 12h8M8 16h8" /></svg> Solicitantes</button>
     </div>
   </header>
 
   <!-- 2. Barra de Herramientas -->
   <div class="modulo-toolbar">
     <div class="buscador">
-      <span>🔍</span>
-      <input type="text" placeholder="Buscar por folio o asunto...">
+      <span><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 3a7 7 0 1 0 0 14 7 7 0 0 0 0-14M15 15l7 7" /></svg></span>
+      <input disabled type="text" placeholder="Buscar por folio o asunto...">
     </div>
     
     <div class="acciones">
@@ -23,7 +23,7 @@
         <!-- Dropdown de Meses -->
         <div class="filtro-grupo">
           <label>Mes:</label>
-          <select>
+          <select disabled>
             <option>Mes</option>
             <option>Enero</option>
             <option>Febrero</option>
@@ -43,7 +43,7 @@
         <!-- Dropdown de Años -->
         <div class="filtro-grupo">
           <label>Año:</label>
-          <select>
+          <select disabled>
             <option>Año</option>
             <option>2026</option>
             <option>2025</option>
@@ -55,7 +55,7 @@
           </select>
         </div>
       </div>
-      <button class="btn-primario">⊕ Nuevo</button>
+      <button disabled class="btn-primario"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v18M3 12h18" /></svg> Nuevo</button>
     </div>
   </div>
 
@@ -63,32 +63,32 @@
   <div class="grid-tarjetas" *ngIf="tabActiva === 'becas'">
     <article class="tarjeta-beca">
       <div class="tarjeta-header">
-        <h3>🏅 Estímulo alimenticio 2025-2026/2</h3>
+        <h3><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 1 0 0 12 6 6 0 0 0 0-12ZM8 14l-2 8 6-3 6 3-2-8" /></svg> Estímulo alimenticio 2025-2026/2</h3>
       </div>
       <div class="tarjeta-body">
         <div class="etiquetas">
-          <span class="badge-amarillo">🚫 No económico</span>
-          <span class="badge-bordeado">✔️ Habilitada</span>
+          <span class="badge-amarillo"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20M5 5l14 14" /></svg> No económico</span>
+          <span class="badge-bordeado"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12 5 5L20 6" /></svg> Habilitada</span>
         </div>
         <p class="descripcion-beca">
           Desayuno o comida gratis de lunes a viernes durante el periodo escolar 2025-2026/2.
         </p>
         <div class="requisitos">
-          <h4>✔️ Requisitos</h4>
+          <h4><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12 5 5L20 6" /></svg> Requisitos</h4>
           <ul>
-            <li>✔️ Historial académico</li>
-            <li>✔️ Estudio socioeconómico</li>
+            <li><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12 5 5L20 6" /></svg> Historial académico</li>
+            <li><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12 5 5L20 6" /></svg> Estudio socioeconómico</li>
           </ul>
         </div>
         <div class="vigencia">
-          📅 Vigencia: 09/02/2026 - 20/02/2026
+          <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 5h18v17H3ZM7 2v6M17 2v6M3 11h18" /></svg> Vigencia: 09/02/2026 - 20/02/2026
         </div>
       </div>
       <div class="tarjeta-footer">
-        <button title="Editar">✏️</button>
-        <button title="Eliminar">🗑️</button>
-        <button title="Deshabilitar">🔛</button>
-        <button title="Descargar">📥</button>
+        <button disabled title="Editar"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 17 13-13 4 4L7 21H3Zm11-11 4 4" /></svg></button>
+        <button disabled title="Eliminar"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18M9 6V3h6v3M5 6l1 16h12l1-16M10 10v8M14 10v8" /></svg></button>
+        <button disabled title="Deshabilitar"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20M5 5l14 14" /></svg></button>
+        <button disabled title="Descargar"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2v13m-5-5 5 5 5-5M3 16v6h18v-6" /></svg></button>
       </div>
     </article>
   </div>

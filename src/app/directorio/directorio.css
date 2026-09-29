@@ -27,3 +27,8 @@ button { padding: 10px 15px; border: none; border-radius: 8px; font-weight: bold
 .iconos-accion { display: flex; gap: 8px; }
 .iconos-accion button { background: #fae8e9; color: #a81318; padding: 8px; border-radius: 50%; font-size: 14px; opacity: 0.9; transition: opacity 0.2s; }
 .iconos-accion button:hover { opacity: 1; }
+/* Armonización con el panel y acciones pendientes. */
+.modulo-contenedor { font-family: inherit; padding: 0; }
+.modulo-cabecera h2 { color: var(--ink); }
+button:disabled, input:disabled, select:disabled { opacity: .55; cursor: not-allowed; }
+.btn-primario, .tab.activa { background: var(--wine); border-color: var(--wine); color: white; }

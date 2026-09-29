@@ -1,57 +1,96 @@
+<a href="#main-content" class="skip">Saltar al contenido</a>
+
 <div class="app-layout">
-  
-  <!-- 1. Menú Lateral Izquierdo (Fijo) -->
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <img src="dgeti.svg" alt="SIVI Logo" class="logo">
-      <div class="brand">
-        <strong>SiVi</strong>
-        <span>Vinculador</span>
-      </div>
-      <span class="badge">Alpha</span>
+  @if (menuOpen()) {
+    <button class="scrim" aria-label="Cerrar menú" (click)="closeMenu()"></button>
+  }
+
+  <aside class="sidebar" [class.open]="menuOpen()" (keydown.escape)="closeMenu()">
+    <a routerLink="/vinculacion" class="brand" (click)="closeMenu()"
+      ><img src="dgeti.svg" width="46" height="46" alt="DGETI" />
+
+      <div>
+        <strong>SiVi<span> / DGETI</span></strong
+        ><small>Vinculación institucional</small>
+      </div></a
+    >
+
+    <div class="workspace">
+      <span class="eyebrow">Espacio de trabajo</span><strong>CBTIS · Vinculación</strong
+      ><small>Vinculador de plantel</small>
     </div>
 
-    <nav class="sidebar-menu">
-      <a routerLink="/vinculacion/documentos" routerLinkActive="active">📄 Documentos</a>
-      <a routerLink="/vinculacion/becas" routerLinkActive="active">🏅 Becas</a>
-      <a routerLink="/vinculacion/colaboracion" routerLinkActive="active">🤝 Colaboración</a>
-      <a routerLink="/vinculacion/practicas" routerLinkActive="active">💼 Prácticas profesionales</a>
-      <a routerLink="/vinculacion/servicio-social" routerLinkActive="active">🤲 Servicio social</a>
-      <a routerLink="/vinculacion/directorio" routerLinkActive="active">📇 Directorio telefónico</a>
-      <a routerLink="/vinculacion/educacion-dual" routerLinkActive="active">🎓 Educación dual</a>
-      <a routerLink="/vinculacion/bolsa-trabajo" routerLinkActive="active">💼 Bolsa de trabajo</a>
-      <a routerLink="/vinculacion/egresados" routerLinkActive="active">👨‍🎓 Egresados</a>
-      <a routerLink="/vinculacion/convocatorias" routerLinkActive="active">📢 Convocatorias</a>
-      <a routerLink="/vinculacion/apoyo" routerLinkActive="active">🛟 Apoyo</a>
-      <a routerLink="/vinculacion/visitas" routerLinkActive="active">📅 Visitas</a>
-      <a routerLink="/vinculacion/alidet" routerLinkActive="active">👥 Alidet</a>
-      <a routerLink="/vinculacion/comite" routerLinkActive="active">👥 Comité vinculador</a>
+    <nav id="panel-menu" aria-label="Menú principal">
+      @for (link of links; track link.path) {
+        <a
+          [routerLink]="['/vinculacion', link.path]"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          (click)="closeMenu()"
+          ><svg
+            class="ui-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path [attr.d]="link.icon" /></svg
+          >{{ link.title }}</a
+        >
+      }
     </nav>
+
+    <div class="sidebar-foot">
+      <span class="badge wine">DGETI</span><small>Vinculación institucional.</small>
+    </div>
   </aside>
 
-  <!-- 2. Lado Derecho (Top bar y Contenido dinámico) -->
   <div class="main-wrapper">
-    
-    <!-- Barra Superior Fija -->
     <header class="top-bar">
-      <!-- Este div vacío empuja el perfil hacia la extrema derecha -->
-      <div class="spacer"></div> 
-      
-      <!-- PERFIL EN LA ESQUINA SUPERIOR DERECHA -->
-      <div class="profile-container">
-        <div class="profile-circle">J</div>
-        <div class="profile-info">
-          <span class="profile-name">Hola, Jesús.</span>
-          <span class="profile-email">vinculador_tester&#64;dgeti.mx</span>
+      <button
+        class="btn quiet menu-toggle"
+        aria-controls="panel-menu"
+        [attr.aria-expanded]="menuOpen()"
+        (click)="menuOpen.set(!menuOpen())"
+      >
+        <svg
+          class="ui-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M3 5h18M3 12h18M3 19h18" />
+        </svg>
+        Menú
+      </button>
+
+      <div class="context">
+        <strong>{{ context.cycle }}</strong
+        ><span>Periodo {{ context.period }}</span>
+      </div>
+
+      <div class="profile">
+        <span class="avatar" aria-hidden="true">{{ session.profile().name.charAt(0) }}</span>
+
+        <div>
+          <strong>{{ session.profile().name }}</strong
+          ><small>Vinculador de plantel</small>
         </div>
+
+        <button class="btn quiet" (click)="logout()">Portada</button>
       </div>
     </header>
 
-    <!-- 3. Área Dinámica (El ÚNICO lugar que cambia y hace scroll) -->
-    <main class="content-area">
-      <router-outlet></router-outlet>
-    </main>
-    
-  </div>
+    <main id="main-content" class="content-area" tabindex="-1"><router-outlet /></main>
 
+    <footer class="app-footer">SiVi / Sistema Virtual de Vinculación <span>DGETI</span></footer>
+  </div>
 </div>

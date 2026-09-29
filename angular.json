@@ -48,6 +48,15 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "github-pages": {
+              "baseHref": "/vinculacioncbtis144/",
+              "fileReplacements": [
+                {
+                  "replace": "src/app/core/hosting.ts",
+                  "with": "src/app/core/hosting.pages.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

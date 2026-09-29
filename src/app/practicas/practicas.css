@@ -1,127 +1,75 @@
-.modulo-contenedor {
+.back-link {
+  margin-bottom: 24px;
+}
+.requirement-list {
+  display: grid;
+  gap: 10px;
+}
+.requirement {
+  padding: 20px;
   display: flex;
-  flex-direction: column;
   gap: 20px;
-  width: 100%;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: white;
 }
-
-/* --- Cabecera --- */
-.modulo-cabecera h2 {
-  margin: 0;
-  font-size: 24px;
-  color: #333;
+.number {
+  font-size: 0.85rem;
+  color: var(--gold);
+  font-weight: 700;
 }
-
-.modulo-cabecera p {
-  margin: 5px 0 0 0;
-  font-size: 13px;
-  color: #777;
+.requirement-title {
+  flex: 1;
+  min-width: 0;
 }
-
-/* --- Barra de Herramientas --- */
-.modulo-toolbar {
+.requirement-title h2 {
+  font-size: 0.95rem;
+  margin: 0 0 6px;
+}
+.requirement-title p {
+  font-size: 0.77rem;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+.file-row {
   display: flex;
   justify-content: space-between;
+  gap: 16px;
   align-items: center;
-  gap: 15px;
-  flex-wrap: wrap; /* CLAVE PARA MÓVILES: Permite que los elementos bajen si no caben */
+  font-size: 0.83rem;
 }
-
-.buscador {
-  display: flex;
-  align-items: center;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  padding: 8px 15px;
-  flex: 1;
-  min-width: 250px;
+.file-row > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
-
-.buscador input {
-  border: none;
-  outline: none;
-  margin-left: 10px;
-  width: 100%;
-  font-size: 14px;
+.file-row small {
+  display: block;
+  color: var(--muted);
 }
-
-.acciones {
-  display: flex;
-  align-items: flex-end;
-  gap: 20px;
-  flex-wrap: wrap; /* CLAVE PARA MÓVILES */
+.history {
+  padding-left: 20px;
+  font-size: 0.85rem;
 }
-
-.filtros { display: flex; gap: 10px; }
-.filtro-grupo { display: flex; flex-direction: column; font-size: 11px; color: #555;}
-.filtro-grupo select {
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: white;
+.history li {
+  margin-bottom: 16px;
 }
-
-.botones { display: flex; gap: 10px; }
-button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+.history small {
+  color: var(--muted);
 }
-.btn-secundario { background-color: #8c2b2b; color: white; } /* Botones guindas */
-.btn-primario { background-color: #b54949; color: white; }
-
-/* --- Tabla Responsiva --- */
-.tabla-responsiva {
-  width: 100%;
-  overflow-x: auto; /* CLAVE PARA MÓVILES: Activa el scroll horizontal solo para la tabla */
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+.history p {
+  margin: 3px 0;
 }
-
-.tabla-sivi {
-  width: 100%;
-  min-width: 800px; /* Evita que las columnas se aplasten en pantallas pequeñas */
-  border-collapse: collapse;
-}
-
-.tabla-sivi th {
-  background-color: #fae8e9; /* El fondo rosa de tu diseño */
-  color: #333;
-  text-align: left;
-  padding: 15px;
-  font-size: 13px;
-  font-weight: bold;
-}
-
-/* Bordes curvos solo en las esquinas del encabezado rosa */
-.tabla-sivi th:first-child { border-top-left-radius: 12px; }
-.tabla-sivi th:last-child { border-top-right-radius: 12px; }
-
-.tabla-sivi td {
-  padding: 15px;
-  border-bottom: 1px solid #eee;
-  font-size: 13px;
-  color: #444;
-}
-
-/* --- Elementos internos de la tabla --- */
-.badge-estado {
-  color: #666;
-  font-size: 12px;
-}
-
-.iconos-accion { display: flex; gap: 8px; }
-.iconos-accion button {
-  background: #fae8e9;
-  color: #a81318;
-  padding: 8px;
-  border-radius: 50%; /* Botones circulares para acciones */
+@media (max-width: 600px) {
+  .requirement {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .requirement .btn {
+    width: 100%;
+  }
+  .file-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

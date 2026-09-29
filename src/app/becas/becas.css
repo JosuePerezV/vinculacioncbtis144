@@ -104,3 +104,9 @@
   transition: opacity 0.2s;
 }
 .tarjeta-footer button:hover { opacity: 1; }
+
+/* Armonización con el panel y acciones pendientes. */
+.modulo-contenedor { font-family: inherit; padding: 0; }
+.modulo-cabecera h2 { color: var(--ink); }
+button:disabled, input:disabled, select:disabled { opacity: .55; cursor: not-allowed; }
+.btn-primario, .tab.activa { background: var(--wine); border-color: var(--wine); color: white; }

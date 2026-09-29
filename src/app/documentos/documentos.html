@@ -1,237 +1,315 @@
-<div class="modulo-contenedor">
-  
-  <header class="modulo-cabecera">
-    <h2>Documentos</h2>
-    <p>Gestión de documentos registrados en el sistema.</p>
-    
-    <!-- Pestañas (El [class.activa] prende la línea roja automáticamente) -->
-    <div class="tabs-navegacion">
-      <button class="tab" [class.activa]="tabActiva === 'oficios'" (click)="cambiarTab('oficios')"><i class="fa-solid fa-file-signature"></i> Oficios</button>
-      <button class="tab" [class.activa]="tabActiva === 'circulares'" (click)="cambiarTab('circulares')"><i class="fa-solid fa-bullhorn"></i> Circulares</button>
-      <button class="tab" [class.activa]="tabActiva === 'constancias'" (click)="cambiarTab('constancias')"><i class="fa-solid fa-certificate"></i> Constancias</button>
+<section class="page">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">Vinculación / Gestión documental</p>
+      <h1>Documentos</h1>
+      <p>Prepara la información, revisa el contenido y organiza tus borradores.</p>
+    </div>
+    <div class="actions">
+      <button class="btn secondary" (click)="error.set(''); templatesOpen.set(true)">
+        Plantillas</button
+      ><button class="btn" (click)="open()"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v18M3 12h18" /></svg> Nuevo {{ label(kind()).toLowerCase() }}</button>
     </div>
   </header>
+  <div class="tabs" aria-label="Tipos de documento">
+    @for (tab of kinds; track tab.id) {
+      <button
+        [class.active]="kind() === tab.id"
+        [attr.aria-pressed]="kind() === tab.id"
+        (click)="switchKind(tab.id)"
+      >
+        {{ tab.label }}
+      </button>
+    }
+  </div>
 
-  <!-- Barra de Herramientas -->
-  <div class="modulo-toolbar">
-   <div class="buscador">
-      <span><i class="fa-solid fa-magnifying-glass" style="color: #888;"></i></span>
-      <input type="text" placeholder="Buscar por folio o asunto...">
+  <div class="toolbar">
+    <label class="field"
+      >Buscar borradores<input
+        type="search"
+        [ngModel]="search()"
+        (ngModelChange)="search.set($event); page.set(1)"
+        placeholder="Folio, asunto o destinatario" /></label
+    ><span class="badge">{{ filtered().length }} registros</span>
+  </div>
+  @if (message()) {
+    <p class="notice success" role="status">{{ message() }}</p>
+  }
+  @if (error() && !editor() && !templatesOpen()) {
+    <p class="notice error" role="alert">{{ error() }}</p>
+  }
+  <div class="table-wrap">
+    <table class="data-table">
+      <caption class="sr-only">
+        Borradores de
+        {{
+          label(kind())
+        }}
+      </caption>
+      <thead>
+        <tr>
+          <th>Folio / Asunto</th>
+          <th>Destinatario</th>
+          <th>Fecha</th>
+          <th>Versión</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (record of rows(); track record.id) {
+          <tr>
+            <td>
+              <strong>{{ record.folio }}</strong
+              ><small>{{ record.subject }}</small>
+            </td>
+            <td>{{ record.recipient }}</td>
+            <td>{{ record.date | date: 'dd/MM/yyyy' }}</td>
+            <td>
+              <span class="badge">Borrador v{{ record.revisions.length }}</span>
+            </td>
+            <td>
+              <div class="actions">
+                <button class="btn secondary" (click)="open(record)">Editar / ver</button
+                ><button class="btn quiet" (click)="selectedRecord.set(record)">Versiones</button
+                ><label class="btn quiet"
+                  >Adjuntar PDF<input
+                    class="sr-only"
+                    type="file"
+                    accept=".pdf,application/pdf"
+                    [disabled]="reading()"
+                    (change)="attachPdf($event, record)"
+                /></label>
+                @if (record.attachment) {
+                  <button class="btn quiet" (click)="pdf.set(record.attachment)">Ver PDF</button>
+                }
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" class="empty">
+              {{
+                search()
+                  ? 'No hay borradores que coincidan con la búsqueda.'
+                  : 'Todavía no hay borradores de este tipo. Crea el primero con el botón Nuevo.'
+              }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination">
+    <span>Página {{ page() }} de {{ pages() }}</span>
+    <div class="actions">
+      <button class="btn quiet" [disabled]="page() === 1" (click)="page.set(page() - 1)">
+        Anterior</button
+      ><button class="btn quiet" [disabled]="page() >= pages()" (click)="page.set(page() + 1)">
+        Siguiente
+      </button>
     </div>
-    
-    <div class="acciones">
-     <div class="filtros">
-        <!-- Dropdown de Meses -->
-        <div class="filtro-grupo">
-          <label>Mes:</label>
-          <select>
-            <option>Mes</option>
-            <option>Enero</option>
-            <option>Febrero</option>
-            <option>Marzo</option>
-            <option>Abril</option>
-            <option>Mayo</option>
-            <option>Junio</option>
-            <option>Julio</option>
-            <option>Agosto</option>
-            <option>Septiembre</option>
-            <option>Octubre</option>
-            <option>Noviembre</option>
-            <option>Diciembre</option>
-          </select>
-        </div>
-        
-        <!-- Dropdown de Años -->
-        <div class="filtro-grupo">
-          <label>Año:</label>
-          <select>
-            <option>Año</option>
-            <option>2026</option>
-            <option>2025</option>
-            <option>2024</option>
-            <option>2023</option>
-            <option>2022</option>
-            <option>2021</option>
-            <option>2020</option>
-          </select>
-        </div>
-      </div>
-      
-      <!-- Los botones cambian de orden según la pestaña -->
-      <div class="botones">
-        <ng-container *ngIf="tabActiva === 'oficios' || tabActiva === 'circulares'">
-          <button class="btn-primario" (click)="abrirModalNuevo()"><i class="fa-solid fa-plus"></i> Nuevo</button>
-          <button class="btn-secundario" (click)="abrirModalPlantilla()"><i class="fa-solid fa-file-word"></i> Plantilla</button>
-        </ng-container>
-        
-        <ng-container *ngIf="tabActiva === 'constancias'">
-          <button class="btn-secundario" (click)="abrirModalPlantilla()"><i class="fa-solid fa-file-word"></i> Plantilla</button>
-          <button class="btn-primario" (click)="abrirModalNuevo()"><i class="fa-solid fa-plus"></i> Nuevo</button>
-        </ng-container>
-      </div>
-    </div>
   </div>
-
-  <!-- ================= TABLA 1: OFICIOS ================= -->
-  <div class="tabla-responsiva" *ngIf="tabActiva === 'oficios'">
-    <table class="tabla-sivi">
-      <thead>
-        <tr>
-          <th>Folio</th><th>Fecha</th><th>Asunto</th><th>Destinatario</th><th>Remitente</th><th>Estatus</th><th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>001/CB144-VINC/05/2026</td>
-          <td>26/05/2026</td>
-          <td>Feria vocacional CBTis 144</td>
-          <td class="celda-doble"><span class="nombre">Arallely Díaz</span><span class="cargo">Jefa de docentes</span></td>
-          <td class="celda-doble"><span class="nombre">Jesús Castillejos Aragon</span><span class="cargo">Jefe del Departamento de Vinculación con el Sector Productivo</span></td>
-          <td><span class="badge-estado">Enviado</span></td>
-          <td class="iconos-accion">
-            <button title="Descargar"><i class="fa-solid fa-download"></i></button> 
-            <button title="Editar"><i class="fa-solid fa-pen"></i></button> 
-            <button title="Eliminar"><i class="fa-solid fa-trash"></i></button> 
-            <button title="Subir"><i class="fa-solid fa-upload"></i></button> 
-            <button title="Ver"><i class="fa-solid fa-eye"></i></button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- ================= TABLA 2: CIRCULARES ================= -->
-  <div class="tabla-responsiva" *ngIf="tabActiva === 'circulares'">
-    <table class="tabla-sivi">
-      <thead>
-        <tr>
-          <th>Folio</th><th>Fecha</th><th>Asunto</th><th>Destinatario</th><th>Firmante</th><th>Elabora</th><th>Revisó</th><th>Estatus</th><th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>002/CIR-CB144-VINC/05/2026</td>
-          <td>27/05/2026</td>
-          <td>Feria vocacional CBTis 144</td>
-          <td>Ramon gonzales</td>
-          <td class="celda-doble"><span class="nombre">Jesús Castillejos Aragón</span><span class="cargo">Jefe del Departamento de Vinculación con el Sector Productivo</span></td>
-          <td>N/A</td>
-          <td>N/A</td>
-          <td><span class="badge-estado">Enviado</span></td>
-          <td class="iconos-accion">
-            <button title="Descargar">📥</button> <button title="Subir">📤</button> <button title="Ver">👁️</button> <button title="Editar">✏️</button> <button title="Eliminar">🗑️</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- ================= TABLA 3: CONSTANCIAS ================= -->
-  <div class="tabla-responsiva" *ngIf="tabActiva === 'constancias'">
-    <table class="tabla-sivi">
-      <thead>
-        <tr>
-          <th>Periodo</th><th>Nombre</th><th>Tipo de aporte</th><th>Descripción</th><th>Lugar de expedición</th><th>Fecha de expedición</th><th>Actividad o evento</th><th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>2025-<br>2026/2</td>
-          <td>CESAR AUGUSTO FLORES<br>BARRIENTOS</td>
-          <td>Por su aportación en mejora continua<br>en la educación</td>
-          <td>Demostrado a través de la<br>elaboración de reactivos</td>
-          <td>Tuxtla Gutiérrez</td>
-          <td>2026-02-09<br>00:00:00</td>
-          <td>Elaboración de reactivos</td>
-          <td class="iconos-accion">
-            <button title="Descargar">📥</button> <button title="Subir">📤</button> <button title="Ver">👁️</button> <button title="Eliminar">🗑️</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-<!-- ================= MODAL NUEVO OFICIO ================= -->
-  <div class="modal-overlay" *ngIf="mostrarModalNuevo">
-    <div class="modal-content">
-      
-      <h3>Crear Nuevo Oficio</h3>
-      <p class="modal-subtitle">Complete el formulario para agregar un nuevo oficio.</p>
-
-      <form>
-        <div class="form-checkbox">
-          <input type="checkbox" id="folioPersonalizado">
-          <label for="folioPersonalizado">Usar folio personalizado</label>
+</section>
+@if (editor()) {
+  <app-modal
+    [title]="(preview() ? 'Vista previa · ' : draft.id ? 'Editar ' : 'Nuevo ') + label(draft.kind)"
+    (closed)="closeEditor()"
+  >
+    @if (!preview()) {
+      <form #documentForm="ngForm" (ngSubmit)="save(documentForm)" novalidate>
+        <div class="form-grid">
+          <label class="field"
+            >Folio de referencia<input
+              name="folio"
+              [(ngModel)]="draft.folio"
+              maxlength="80"
+              placeholder="Se asignará una referencia de borrador"
+            /><small>Referencia del documento.</small></label
+          >
+          <label class="field"
+            >Fecha *<input name="date" type="date" [(ngModel)]="draft.date" required
+          /></label>
+          <label class="field full"
+            >{{ draft.kind === 'constancia' ? 'Título de la constancia' : 'Asunto' }} *<input
+              name="subject"
+              [(ngModel)]="draft.subject"
+              required
+              maxlength="180"
+          /></label>
+          <label class="field"
+            >{{
+              draft.kind === 'constancia' ? 'Nombre de quien recibe la constancia' : 'Destinatario'
+            }}
+            *<input name="recipient" [(ngModel)]="draft.recipient" required maxlength="150"
+          /></label>
+          @if (draft.kind === 'oficio') {
+            <label class="field"
+              >Puesto del destinatario<input
+                name="recipientRole"
+                [(ngModel)]="draft.recipientRole"
+                maxlength="180"
+            /></label>
+          }
+          @if (draft.kind === 'constancia') {
+            <label class="field"
+              >Actividad o aportación *<input
+                name="activity"
+                [(ngModel)]="draft.activity"
+                required
+                maxlength="200"
+            /></label>
+          }
+          <label class="field"
+            >Lugar de expedición *<input
+              name="location"
+              [(ngModel)]="draft.location"
+              required
+              maxlength="150"
+          /></label>
+          <label class="field"
+            >{{ draft.kind === 'oficio' ? 'Remitente' : 'Firmante' }} *<input
+              name="signer"
+              [(ngModel)]="draft.signer"
+              required
+              maxlength="150"
+          /></label>
+          <label class="field"
+            >Cargo de quien firma *<input
+              name="signerRole"
+              [(ngModel)]="draft.signerRole"
+              required
+              maxlength="180"
+          /></label>
+          <label class="field"
+            >Teléfono de contacto<input
+              name="phone"
+              type="tel"
+              [(ngModel)]="draft.phone"
+              maxlength="30"
+          /></label>
+          <label class="field full"
+            >Cuerpo del documento *<textarea
+              name="body"
+              [(ngModel)]="draft.body"
+              required
+              maxlength="12000"
+              rows="8"
+              placeholder="Redacta el contenido. Se conservarán los saltos de línea."
+            ></textarea
+            ><small>{{ draft.body.length }} / 12000 caracteres</small></label
+          >
+          <label class="field full"
+            >Plantilla de referencia<select name="template" [(ngModel)]="draft.template">
+              <option value="">Formato básico</option>
+              @for (t of store.templates(); track $index) {
+                @if (t.kind === draft.kind) {
+                  <option [value]="t.name">{{ t.name }}</option>
+                }
+              }</select
+            ><small
+              >La vista previa no interpreta el DOCX seleccionado; muestra los campos del
+              formulario.</small
+            ></label
+          >
         </div>
-
-        <div class="form-group">
-          <label>Folio</label>
-          <input type="text" value="001/CB144-VINC/09/2026">
-        </div>
-
-        <div class="form-group">
-          <label>Fecha del Oficio</label>
-          <input type="date" value="2026-09-08">
-        </div>
-
-        <div class="form-group">
-          <label>Asunto</label>
-          <input type="text" placeholder="Ingrese el asunto del oficio">
-        </div>
-
-        <div class="form-group">
-          <label>Destinatario</label>
-          <input type="text" placeholder="Ingrese el nombre del destinatario">
-        </div>
-
-        <div class="form-group">
-          <label>Puesto del Destinatario</label>
-          <input type="text" placeholder="Ingrese el puesto del destinatario">
-        </div>
-
-        <div class="form-group">
-          <label>Remitente</label>
-          <input type="text" value="Jesús Lira">
-        </div>
-
-        <div class="form-group">
-          <label>Puesto del Remitente</label>
-          <input type="text" value="Jefe del Departamento de Vinculación con el Sector Productivo">
-        </div>
-
-        <div class="modal-acciones">
-          <button type="button" class="btn-cancelar" (click)="cerrarModalNuevo()">Cancelar</button>
-          <button type="button" class="btn-guardar">Crear Oficio</button>
+        @if (error()) {
+          <p class="notice error" role="alert">{{ error() }}</p>
+        }
+        <div class="form-footer">
+          <button class="btn secondary" type="button" (click)="closeEditor()">Cancelar</button
+          ><button class="btn secondary" type="button" (click)="showPreview(documentForm)">
+            Previsualizar</button
+          ><button class="btn" type="submit">Guardar borrador</button>
         </div>
       </form>
-
-    </div>
-  </div> 
-
-  <!-- ================= MODAL SUBIR PLANTILLA ================= -->
-  <div class="modal-overlay" *ngIf="mostrarModalPlantilla">
-    <div class="modal-content" style="max-width: 500px;">
-      
-      <!-- Usamos la función para cambiar el título -->
-      <h3>Subir Plantilla de {{ obtenerTipoDoc() }}</h3>
-      
-      <!-- Usamos la función, la convertimos a minúsculas y usamos tabActiva para el plural -->
-      <p class="modal-subtitle">
-        Sube una plantilla de {{ obtenerTipoDoc().toLowerCase() }} en formato .docx para usarla al generar nuevas {{ tabActiva }}.
+    } @else {
+      <p class="notice">
+        Previsualización de contenido · Sin validez oficial. El membrete y la paginación definitivos
+        dependen de la plantilla aprobada.
       </p>
-
-      <form>
-        <div class="form-group">
-          <label>Seleccionar Archivo</label>
-          <input type="file" accept=".docx" class="input-archivo">
+      <article class="paper">
+        <div class="paper-brand">
+          <img src="dgeti.svg" alt="DGETI" width="48" />
+          <div>
+            <strong>SiVi · DGETI</strong><small>Vinculación con el sector productivo</small>
+          </div>
+          <span>BORRADOR</span>
         </div>
-
-        <div class="modal-acciones">
-          <button type="button" class="btn-cancelar" (click)="cerrarModalPlantilla()">Cancelar</button>
-          <button type="button" class="btn-guardar">Subir Plantilla</button>
-        </div>
-      </form>
-
-    </div>
-  </div>
-
-</div> 
+        <p class="paper-date">
+          {{ label(draft.kind) }} · {{ draft.folio || 'Sin folio oficial' }}<br />{{
+            draft.location
+          }}, {{ draft.date | date: 'dd/MM/yyyy' }}
+        </p>
+        <h3>{{ draft.subject }}</h3>
+        <p>
+          <strong>{{ draft.recipient }}</strong>
+          @if (draft.kind === 'oficio') {
+            <br />{{ draft.recipientRole }}
+          }
+        </p>
+        @if (draft.kind === 'constancia') {
+          <p><strong>Actividad:</strong> {{ draft.activity }}</p>
+        }
+        <div class="paper-body">{{ draft.body }}</div>
+        <p class="signature">
+          ATENTAMENTE<br /><strong>{{ draft.signer }}</strong
+          ><br />{{ draft.signerRole }}
+          @if (draft.phone) {
+            <br />Tel. {{ draft.phone }}
+          }
+        </p>
+        <footer>Vinculación con el sector productivo.</footer>
+      </article>
+      <div class="form-footer">
+        <button class="btn secondary" (click)="preview.set(false)">← Volver a editar</button
+        ><button class="btn" (click)="save()">Guardar borrador</button>
+      </div>
+    }
+  </app-modal>
+}
+@if (templatesOpen()) {
+  <app-modal
+    [title]="'Plantillas de ' + label(kind()).toLowerCase()"
+    (closed)="templatesOpen.set(false); error.set('')"
+    ><p class="notice">Selecciona un DOCX como referencia del documento.</p>
+    <label class="field"
+      >Archivo Word (.docx, máximo 10 MB)<input
+        type="file"
+        accept=".docx"
+        [disabled]="reading()"
+        (change)="selectTemplate($event)"
+    /></label>
+    @if (reading()) {
+      <p role="status">Leyendo archivo…</p>
+    }
+    @if (error()) {
+      <p class="notice error" role="alert">{{ error() }}</p>
+    }
+    <ul>
+      @for (t of store.templates(); track $index) {
+        @if (t.kind === kind()) {
+          <li>{{ t.name }}</li>
+        }
+      }
+    </ul></app-modal
+  >
+}
+@if (pdf(); as file) {
+  <app-modal title="Archivo PDF" (closed)="pdf.set(null)"
+    ><app-pdf-preview [file]="file"
+  /></app-modal>
+}
+@if (selectedRecord(); as record) {
+  <app-modal title="Historial de borradores" (closed)="selectedRecord.set(null)"
+    ><p class="muted">{{ record.subject }} · Historial de versiones.</p>
+    @for (version of record.revisions; track $index) {
+      <details class="revision">
+        <summary>Versión {{ $index + 1 }} · {{ version.date | date: 'dd/MM/yyyy HH:mm' }}</summary>
+        <p>
+          <strong>{{ version.draft.subject }}</strong> · {{ version.draft.recipient }}
+        </p>
+        <p class="paper-body">{{ version.draft.body }}</p>
+      </details>
+    }
+  </app-modal>
+}

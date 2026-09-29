@@ -1,59 +1,49 @@
-# DgetiSivi
+# SiVi · Frontend de vinculación DGETI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.5.
+Primera entrega del frontend en Angular. El backend, la base de datos y la autenticación real se integrarán por separado.
 
-## Development server
+## Ejecutar
 
-To start a local development server, run:
+Con las dependencias instaladas:
 
-```bash
-ng serve
+```powershell
+node node_modules/@angular/cli/bin/ng.js serve --host 127.0.0.1 --port 4200
+node node_modules/@angular/cli/bin/ng.js build
+node node_modules/@angular/cli/bin/ng.js test --watch=false
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Acceso directo: http://localhost:4200/vinculacion/resumen. No se solicita contraseña. La ruta /login conserva el formulario visual original y un enlace directo al panel; /primer-acceso redirige al panel. El formulario valida campos obligatorios y navega sin autenticar: no compara, guarda ni envía contraseñas. Al integrar, sustituir Login.submit por una llamada al servicio de autenticación y añadir las guardas de sesión correspondientes.
 
-## Code scaffolding
+## Incluido
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Panel adaptable y navegación a todos los módulos; acceso directo y página 404.
+- Documentos: formularios diferenciados para oficios, circulares y constancias, cuerpo editable, vista previa, borradores y versiones, selección local de plantillas DOCX y visor de PDF adjuntos.
+- Prácticas: búsqueda y filtros, solicitud por etapas, expediente con ciclo y periodo, once requisitos, entrega local de PDF, revisión, observaciones, corrección y nueva entrega, calendario y excepciones individuales justificadas.
+- Estructura inicial de Educación dual, Bolsa de trabajo, Egresados, Convocatorias, Apoyo, Visitas, ALIDET y Comité vinculador. Servicio social muestra sus pendientes. Becas, Colaboración y Directorio conservan sus vistas de muestra con acciones pendientes deshabilitadas.
 
-```bash
-ng generate component component-name
-```
+## Límites e integración
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Todos los datos y archivos viven exclusivamente en memoria y se pierden al recargar. No hay llamadas a un backend, envío de correos, guardado persistente ni documentos oficiales generados. La selección de DOCX no interpreta ni aplica su contenido. La constancia tiene estructura provisional pendiente de formato institucional.
 
-```bash
-ng generate --help
-```
+Los servicios `src/app/core/session.ts`, `documents-store.ts` y `practices-store.ts` separan el estado de las vistas para facilitar la futura integración. Sus tipos describen los datos usados por el frontend; no constituyen un contrato de API acordado.
 
-## Building
+Antes de conectar: acordar autenticación y permisos por rol, identificadores y catálogos, historial académico por ciclo/periodo, estados y transiciones de revisión, zona horaria de plazos, almacenamiento de archivos y generación documental. El servidor deberá validar permisos, archivos y reglas de negocio; el acceso actual es libre para construir las vistas.
 
-To build the project run:
+## Verificación
 
-```bash
-ng build
-```
+Las pruebas cubren navegación del menú, acceso directo y redirecciones, historial de borradores, revisión y correcciones de entregas, y bloqueo de plazos con excepciones individuales.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
+## Publicación del avance
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Repositorio: https://github.com/JosuePerezV/vinculacioncbtis144
 
-```bash
-ng test
-```
+Sitio: https://josueperezv.github.io/vinculacioncbtis144/
 
-## Running end-to-end tests
+Panel: https://josueperezv.github.io/vinculacioncbtis144/#/vinculacion/resumen
 
-For end-to-end (e2e) testing, run:
+Cada push a main ejecuta las pruebas, compila y publica mediante GitHub Actions. En Settings > Pages, la fuente de publicación debe ser GitHub Actions. La configuración github-pages aplica la ruta base del repositorio y navegación con # para permitir enlaces directos y recargas; ng serve conserva las direcciones locales habituales.
 
-```bash
-ng e2e
-```
+Compilación para Pages: `npm run build -- --configuration production,github-pages`.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+El remoto origin corresponde al repositorio del avance. El remoto anterior conserva la referencia a dgeti-sivi y no recibe las publicaciones de este proyecto. Para actualizar el avance: `git push origin main`.
