@@ -5,23 +5,29 @@ import { routes } from '../app.routes';
 import { navigation } from './navigation';
 import { PracticesStore } from './practices-store';
 import { DocumentsStore, blankDocument } from './documents-store';
+import { PanelProfile } from './session';
 import { relativeDate } from './calendar';
 
 describe('Rutas y primer ingreso', () => {
   beforeEach(() => TestBed.configureTestingModule({ providers: [provideRouter(routes)] }));
-  it('opens the panel directly and redirects former access URLs', async () => {
+  it('requires valid credentials and blocks the panel after logout', async () => {
     const harness = await RouterTestingHarness.create();
-    for (const url of ['/vinculacion', '/primer-acceso']) {
-      await harness.navigateByUrl(url);
-      expect(TestBed.inject(Router).url).toBe('/vinculacion/resumen');
-    }
-    await harness.navigateByUrl('/login');
-    expect(TestBed.inject(Router).url).toBe('/login');
-    expect(harness.routeNativeElement?.textContent).toContain('Accede a tu cuenta');
     await harness.navigateByUrl('/vinculacion/practicas');
-    expect(TestBed.inject(Router).url).toBe('/vinculacion/practicas');
+    expect(TestBed.inject(Router).url).toBe('/login');
+    const session = TestBed.inject(PanelProfile);
+    expect(session.login('incorrecto@example.test', 'incorrecta')).toBe(false);
+    expect(session.login('vinculacion@cbtis144.local', 'Cbtis144!2026')).toBe(true);
+    await harness.navigateByUrl('/vinculacion');
+    expect(TestBed.inject(Router).url).toBe('/vinculacion/resumen');
+    session.updateProfile({ name: 'Nuevo nombre', email: 'nuevo@example.test', phone: '123' });
+    expect(session.profile().name).toBe('Nuevo nombre');
+    session.logout();
+    await harness.navigateByUrl('/vinculacion/documentos');
+    expect(TestBed.inject(Router).url).toBe('/login');
+    expect(session.login('nuevo@example.test', 'Cbtis144!2026')).toBe(true);
   });
   it('connects every menu destination and renders an unknown-route page', async () => {
+    TestBed.inject(PanelProfile).login('vinculacion@cbtis144.local', 'Cbtis144!2026');
     const harness = await RouterTestingHarness.create();
     for (const link of navigation) {
       await harness.navigateByUrl(`/vinculacion/${link.path}`);

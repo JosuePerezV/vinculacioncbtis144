@@ -3,6 +3,6 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-primer-acceso',
   imports: [RouterLink],
-  template: '<a class="btn" routerLink="/vinculacion/resumen">Ir al panel</a>',
+  template: '<a class="btn" routerLink="/login">Iniciar sesión</a>',
 })
 export class PrimerAcceso {}

@@ -2,7 +2,6 @@ import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DocumentsStore } from '../core/documents-store';
 import { PracticesStore } from '../core/practices-store';
-import { schoolContext } from '../core/calendar';
 @Component({
   selector: 'app-resumen',
   imports: [RouterLink],
@@ -13,7 +12,6 @@ import { schoolContext } from '../core/calendar';
         <h1>Un nuevo ciclo, nuevas oportunidades.</h1>
         <p>Organiza los documentos y acompaña cada etapa de las prácticas profesionales.</p>
       </div>
-      <span class="badge wine">{{ context.cycle }} / {{ context.period }}</span>
     </header>
     <div class="cards">
       <article class="panel metric">
@@ -74,7 +72,6 @@ import { schoolContext } from '../core/calendar';
 export class Resumen {
   readonly practices = inject(PracticesStore);
   readonly documents = inject(DocumentsStore);
-  readonly context = schoolContext();
   readonly pending = computed(
     () =>
       this.practices

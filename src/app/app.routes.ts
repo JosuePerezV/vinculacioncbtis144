@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { panelGuard } from './core/session';
 import { Inicio } from './inicio/inicio';
 
 export const routes: Routes = [
@@ -11,6 +12,8 @@ export const routes: Routes = [
   { path: 'primer-acceso', pathMatch: 'full', redirectTo: 'vinculacion/resumen' },
   {
     path: 'vinculacion',
+    canActivate: [panelGuard],
+    canActivateChild: [panelGuard],
     loadComponent: () => import('./vinculacion/vinculacion').then((m) => m.Vinculacion),
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'resumen' },

@@ -1,4 +1,6 @@
-<a href="#main-content" class="skip" (click)="$event.preventDefault(); mainContent.focus()">Saltar al contenido</a>
+<a href="#main-content" class="skip" (click)="$event.preventDefault(); mainContent.focus()"
+  >Saltar al contenido</a
+>
 
 <div class="app-layout">
   @if (menuOpen()) {
@@ -6,7 +8,7 @@
   }
 
   <aside class="sidebar" [class.open]="menuOpen()" (keydown.escape)="closeMenu()">
-    <a routerLink="/vinculacion" class="brand" (click)="closeMenu()"
+    <a routerLink="/" class="brand" aria-label="Ir al inicio" (click)="closeMenu()"
       ><img src="dgeti.svg" width="46" height="46" alt="DGETI" />
 
       <div>
@@ -42,10 +44,6 @@
         >
       }
     </nav>
-
-    <div class="sidebar-foot">
-      <span class="badge wine">DGETI</span><small>Vinculación institucional.</small>
-    </div>
   </aside>
 
   <div class="main-wrapper">
@@ -72,21 +70,19 @@
         Menú
       </button>
 
-      <div class="context">
-        <strong>{{ context.cycle }}</strong
-        ><span>Periodo {{ context.period }}</span>
-      </div>
-
-      <div class="profile">
+      <button
+        type="button"
+        class="profile profile-button"
+        (click)="openProfile()"
+        aria-label="Editar mi perfil"
+        aria-haspopup="dialog"
+      >
         <span class="avatar" aria-hidden="true">{{ session.profile().name.charAt(0) }}</span>
-
-        <div>
-          <strong>{{ session.profile().name }}</strong
-          ><small>Vinculador de plantel</small>
-        </div>
-
-        <button class="btn quiet" (click)="logout()">Portada</button>
-      </div>
+        <span class="profile-text"
+          ><strong>{{ session.profile().name }}</strong
+          ><small>Vinculador de plantel</small></span
+        >
+      </button>
     </header>
 
     <main #mainContent id="main-content" class="content-area" tabindex="-1"><router-outlet /></main>
@@ -94,3 +90,51 @@
     <footer class="app-footer">SiVi / Sistema Virtual de Vinculación <span>DGETI</span></footer>
   </div>
 </div>
+
+@if (profileOpen()) {
+  <app-modal title="Mi perfil" (closed)="profileOpen.set(false)">
+    <form #profileForm="ngForm" (ngSubmit)="saveProfile(profileForm)">
+      <div class="grid">
+        <label class="field"
+          >Nombre completo<input
+            name="name"
+            [(ngModel)]="profileDraft.name"
+            required
+            maxlength="100"
+            autocomplete="name"
+        /></label>
+        <label class="field"
+          >Correo electrónico<input
+            type="email"
+            name="email"
+            [(ngModel)]="profileDraft.email"
+            required
+            email
+            maxlength="160"
+            autocomplete="email"
+        /></label>
+        <label class="field"
+          >Teléfono<input
+            type="tel"
+            name="phone"
+            [(ngModel)]="profileDraft.phone"
+            maxlength="20"
+            autocomplete="tel"
+        /></label>
+      </div>
+      @if (profileError()) {
+        <p class="notice error" role="alert">{{ profileError() }}</p>
+      }
+      @if (profileMessage()) {
+        <p class="notice success" role="status">{{ profileMessage() }}</p>
+      }
+      <div class="actions section-gap">
+        <button type="button" class="btn quiet" (click)="logout()">Cerrar sesión</button>
+        <button type="button" class="btn secondary" (click)="profileOpen.set(false)">
+          Cancelar
+        </button>
+        <button type="submit" class="btn">Guardar cambios</button>
+      </div>
+    </form>
+  </app-modal>
+}

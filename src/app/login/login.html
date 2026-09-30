@@ -19,13 +19,14 @@
 
       <form class="login-form" #form="ngForm" (ngSubmit)="submit(form)">
         <div class="input-group">
-          <label for="email">Email o matrícula</label>
+          <label for="email">Correo electrónico</label>
           <input
-            type="text"
+            type="email"
             id="email"
             name="username"
             [(ngModel)]="username"
             autocomplete="username"
+            email
             required
           />
         </div>
@@ -46,7 +47,6 @@
         @if (error) {
           <p class="form-error" role="alert">{{ error }}</p>
         }
-        <a class="direct-link" routerLink="/vinculacion/resumen">Ir directamente al panel</a>
       </form>
     </div>
   </div>

@@ -12,11 +12,13 @@ node node_modules/@angular/cli/bin/ng.js build
 node node_modules/@angular/cli/bin/ng.js test --watch=false
 ```
 
-Acceso directo: http://localhost:4200/vinculacion/resumen. No se solicita contraseña. La ruta /login conserva el formulario visual original y un enlace directo al panel; /primer-acceso redirige al panel. El formulario valida campos obligatorios y navega sin autenticar: no compara, guarda ni envía contraseñas. Al integrar, sustituir Login.submit por una llamada al servicio de autenticación y añadir las guardas de sesión correspondientes.
+Ingreso: http://localhost:4200/login. Cuenta del frontend: `vinculacion@cbtis144.local` / `Cbtis144!2026`. Las rutas del panel requieren una sesión en memoria. El perfil permite editar nombre, correo y teléfono; los cambios se reinician al recargar. Si se modifica el correo, se usa el nuevo para volver a entrar durante la misma sesión del navegador.
+
+La contraseña está incluida en el código público exclusivamente para el recorrido del frontend; no constituye autenticación segura. Antes de usar datos reales, sustituir PanelProfile.login/updateProfile por la API y validar sesión, identidad y permisos en el servidor. El rol no es editable desde este formulario.
 
 ## Incluido
 
-- Panel adaptable y navegación a todos los módulos; acceso directo y página 404.
+- Panel adaptable y navegación a todos los módulos; login, perfil editable y página 404.
 - Documentos: formularios diferenciados para oficios, circulares y constancias, cuerpo editable, vista previa, borradores y versiones, selección local de plantillas DOCX y visor de PDF adjuntos.
 - Prácticas: búsqueda y filtros, solicitud por etapas, expediente con ciclo y periodo, once requisitos, entrega local de PDF, revisión, observaciones, corrección y nueva entrega, calendario y excepciones individuales justificadas.
 - Estructura inicial de Educación dual, Bolsa de trabajo, Egresados, Convocatorias, Apoyo, Visitas, ALIDET y Comité vinculador. Servicio social muestra sus pendientes. Becas, Colaboración y Directorio conservan sus vistas de muestra con acciones pendientes deshabilitadas.
@@ -27,7 +29,7 @@ Todos los datos y archivos viven exclusivamente en memoria y se pierden al recar
 
 Los servicios `src/app/core/session.ts`, `documents-store.ts` y `practices-store.ts` separan el estado de las vistas para facilitar la futura integración. Sus tipos describen los datos usados por el frontend; no constituyen un contrato de API acordado.
 
-Antes de conectar: acordar autenticación y permisos por rol, identificadores y catálogos, historial académico por ciclo/periodo, estados y transiciones de revisión, zona horaria de plazos, almacenamiento de archivos y generación documental. El servidor deberá validar permisos, archivos y reglas de negocio; el acceso actual es libre para construir las vistas.
+Antes de conectar: acordar autenticación y permisos por rol, identificadores y catálogos, historial académico por ciclo/periodo, estados y transiciones de revisión, zona horaria de plazos, almacenamiento de archivos y generación documental. El servidor deberá validar permisos, archivos y reglas de negocio; el acceso actual es una validación local del frontend.
 
 ## Verificación
 

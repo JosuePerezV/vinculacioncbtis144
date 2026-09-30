@@ -249,3 +249,28 @@ nav a.active {
 .top-bar {
   background: white;
 }
+
+.profile-button {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  padding: 8px;
+  border-radius: 8px;
+  text-align: left;
+}
+.profile-button:hover {
+  background: #f4f4f4;
+}
+.profile-text {
+  display: grid;
+  gap: 3px;
+}
+@media (max-width: 800px) {
+  .profile-button .avatar {
+    display: grid;
+  }
+  .profile-text {
+    display: none;
+  }
+}
